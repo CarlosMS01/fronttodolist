@@ -18,3 +18,29 @@ cd fronttodolist
 ```
 2. Abre el archivo `index.html` con Live Server
 3. Asegúrate de que el backend esté corriendo en `http://localhost:5000`
+
+## 📁 Estructura de carpetas
+
+```bash
+fronttodolist/
+├── assets/
+│   ├── css/
+│   │   └── home.css
+│   │   └── index.css
+│   ├── js/
+│   │   └── home.js
+│   │   └── index.js
+│   ├── pages/
+│   │   └── home.html
+├── index.html
+├── README.md
+```
+
+## 🧪 Funcionalidades del Frontend
+
+- **Login**: formulario con validación, muestra token y estado
+- **Home**: 
+  - Vista principal con `header`
+  - Formulario para crear nuevas tareas.
+  - Formulario para editar tareas.
+
