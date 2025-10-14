@@ -29,6 +29,7 @@ fronttodolist/
 │   │   └── index.css
 │   ├── js/
 │   │   └── home.js
+│   │   └── index_animations.js
 │   │   └── index.js
 │   ├── pages/
 │   │   └── home.html
@@ -44,3 +45,15 @@ fronttodolist/
   - Formulario para crear nuevas tareas.
   - Formulario para editar tareas.
 
+## 🎯 Animaciones GSAP
+
+#### Funciones disponibles en index_animations:
+- `lookCursor()` – Sigue el cursor con elementos visuales del robot.
+- `robot()` – Anima el robot y su sombra.
+- `passwordFocus()` – Oculta el ojo del robot al enfocar campos de contraseña.
+- `mostrarMensaje()` – Muestra un mensaje animado con `GSAP` (desplazamiento y opacidad).
+
+```js
+// Importar funciones
+import { lookCursor, robot, passwordFocus, mostrarMensaje } from './animaciones.js';
+```

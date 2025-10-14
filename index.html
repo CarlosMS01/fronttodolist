@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="assets/css/index.css">
+</head>
+
+<body>
+
+    <div id="mensaje-flash" class="flash oculto">
+        <p id="mensaje-texto">Login exitoso</p>
+    </div>
+
+    <section class="login-register">
+
+        <div class="container">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="183" height="177" fill="none" viewBox="0 0 283 277">
+                <g class="Robot">
+                    <g class="MotorDerecho">
+                        <path fill="#D6D4E4"
+                            d="M233 56a8 8 0 0 1 8 8v7c0 11.046-8.954 20-20 20h-25V68h13v-4a8 8 0 0 1 8-8h16Z"
+                            class="Union" />
+                        <path fill="#FFFEFF"
+                            d="M238 63.5c0 3.866-7.477 9.5-13 9.5s-12-5.634-12-9.5c0-3.866 6.477-4.5 12-4.5s13 .634 13 4.5Z"
+                            class="Ellipse 16" />
+                        <g class="Union">
+                            <mask id="a" fill="#fff" class="a">
+                                <path
+                                    d="M233 56a8 8 0 0 1 8 8v7c0 11.046-8.954 20-20 20h-25V68h13v-4a8 8 0 0 1 8-8h16Z" />
+                            </mask>
+                            <path fill="#40456D"
+                                d="M241 64h4-4Zm-45 27h-4v4h4v-4Zm0-23v-4h-4v4h4Zm13 0v4h4v-4h-4Zm24-12v4a4 4 0 0 1 4 4h8c0-6.627-5.373-12-12-12v4Zm8 8h-4v7h8v-7h-4Zm0 7h-4c0 8.837-7.163 16-16 16v8c13.255 0 24-10.745 24-24h-4Zm-20 20v-4h-25v8h25v-4Zm-25 0h4V68h-8v23h4Zm0-23v4h13v-8h-13v4Zm13 0h4v-4h-8v4h4Zm0-4h4a4 4 0 0 1 4-4v-8c-6.627 0-12 5.373-12 12h4Zm8-8v4h16v-8h-16v4Z"
+                                mask="url(#a)" />
+                        </g>
+                        <g class="EliceD">
+                            <path fill="#D1D1E3"
+                                d="M272.506 32.682c0 5.012-7.188 7.518-18.25 7.518-11.063 0-22.256-4.476-22.256-7.936s11.128-6.683 22.256-7.1c16.024-1.253 18.695 5.012 18.25 7.518Z"
+                                class="Ellipse 14" />
+                            <path fill="#fff"
+                                d="M270 29c1.994 2.845-3.5 5.5-17.744 5.5C241 33.3 234.5 31.322 234.5 29s6.628-3.61 17.756-3.89C268.28 24.27 270.445 27.318 270 29Z"
+                                class="Ellipse 15" />
+                            <path stroke="#41456D" stroke-width="4"
+                                d="M253.166 25.19c8.766-.731 13.473.771 15.872 2.455 2.369 1.664 2.601 3.553 2.489 4.222l-.027.163v.166c0 1.859-1.166 3.564-4.364 4.907-3.217 1.35-8.035 2.093-14.136 2.093-5.953 0-11.954-1.289-16.425-3.056-2.241-.887-4.009-1.859-5.177-2.782-1.277-1.009-1.398-1.6-1.398-1.662 0 0 .045-.496 1.291-1.364 1.144-.796 2.894-1.61 5.147-2.352 4.484-1.478 10.546-2.542 16.642-2.786l.043-.002.043-.003Z"
+                                class="Ellipse 13" />
+                        </g>
+                        <g class="EliceI">
+                            <path fill="#D1D1E3"
+                                d="M179.044 32.682c0 5.012 7.188 7.518 18.25 7.518 11.063 0 22.256-4.476 22.256-7.936s-11.128-6.683-22.256-7.1c-16.024-1.253-18.695 5.012-18.25 7.518Z"
+                                class="Ellipse 14" />
+                            <path fill="#fff"
+                                d="M181.55 29c-1.995 2.845 3.5 5.5 17.744 5.5 11.256-1.2 17.756-3.178 17.756-5.5s-6.628-3.61-17.756-3.89c-16.024-.84-18.189 2.208-17.744 3.89Z"
+                                class="Ellipse 15" />
+                            <path stroke="#41456D" stroke-width="4"
+                                d="M198.384 25.19c-8.766-.731-13.473.771-15.872 2.455-2.369 1.664-2.601 3.553-2.489 4.222l.027.163v.166c0 1.859 1.166 3.564 4.364 4.907 3.217 1.35 8.035 2.093 14.136 2.093 5.953 0 11.954-1.289 16.425-3.056 2.241-.887 4.009-1.859 5.177-2.782 1.277-1.009 1.398-1.6 1.398-1.662 0 0-.045-.496-1.291-1.364-1.144-.796-2.894-1.61-5.147-2.352-4.484-1.478-10.546-2.542-16.642-2.786l-.043-.002-.043-.003Z"
+                                class="Ellipse 13" />
+                        </g>
+                        <path fill="#536B91" stroke="#41456D" stroke-width="4" d="M220 33h11v24h-11z"
+                            class="Rectangle 4" />
+                        <circle cx="225.5" cy="28.5" r="6.5" fill="#EC8E47" stroke="#41456D" stroke-width="4"
+                            class="Ellipse 12" />
+                    </g>
+                    <g class="MotorIzquiedo">
+                        <path fill="#D6D4E4"
+                            d="M50.55 56a8 8 0 0 0-8 8v7c0 11.046 8.954 20 20 20h25V68h-13v-4a8 8 0 0 0-8-8h-16Z"
+                            class="Union" />
+                        <path fill="#FFFEFF"
+                            d="M45.55 63.5c0 3.866 7.477 9.5 13 9.5s12-5.634 12-9.5c0-3.866-6.477-4.5-12-4.5s-13 .634-13 4.5Z"
+                            class="Ellipse 16" />
+                        <g class="Union">
+                            <mask id="b" fill="#fff" class="b">
+                                <path
+                                    d="M50.55 56a8 8 0 0 0-8 8v7c0 11.046 8.954 20 20 20h25V68h-13v-4a8 8 0 0 0-8-8h-16Z" />
+                            </mask>
+                            <path fill="#40456D"
+                                d="M42.55 64h-4 4Zm45 27h4v4h-4v-4Zm0-23v-4h4v4h-4Zm-13 0v4h-4v-4h4Zm-24-12v4a4 4 0 0 0-4 4h-8c0-6.627 5.373-12 12-12v4Zm-8 8h4v7h-8v-7h4Zm0 7h4c0 8.837 7.163 16 16 16v8c-13.255 0-24-10.745-24-24h4Zm20 20v-4h25v8h-25v-4Zm25 0h-4V68h8v23h-4Zm0-23v4h-13v-8h13v4Zm-13 0h-4v-4h8v4h-4Zm0-4h-4a4 4 0 0 0-4-4v-8c6.627 0 12 5.373 12 12h-4Zm-8-8v4h-16v-8h16v4Z"
+                                mask="url(#b)" />
+                        </g>
+                        <g class="EliceD">
+                            <path fill="#D1D1E3"
+                                d="M11.044 32.682c0 5.012 7.188 7.518 18.25 7.518 11.063 0 22.256-4.476 22.256-7.936s-11.128-6.683-22.256-7.1C13.27 23.91 10.6 30.176 11.044 32.682Z"
+                                class="Ellipse 14" />
+                            <path fill="#fff"
+                                d="M13.55 29c-1.995 2.845 3.5 5.5 17.744 5.5C42.55 33.3 49.05 31.322 49.05 29s-6.628-3.61-17.756-3.89C15.27 24.27 13.104 27.318 13.55 29Z"
+                                class="Ellipse 15" />
+                            <path stroke="#41456D" stroke-width="4"
+                                d="M30.384 25.19c-8.766-.731-13.473.771-15.872 2.455-2.37 1.664-2.6 3.553-2.49 4.222l.028.163v.166c0 1.859 1.166 3.564 4.364 4.907 3.217 1.35 8.035 2.093 14.136 2.093 5.953 0 11.954-1.289 16.425-3.056 2.241-.887 4.009-1.859 5.177-2.782 1.277-1.009 1.398-1.6 1.398-1.662 0 0-.045-.496-1.291-1.364-1.144-.796-2.894-1.61-5.148-2.352-4.483-1.478-10.545-2.542-16.641-2.786l-.043-.002-.043-.003Z"
+                                class="Ellipse 13" />
+                        </g>
+                        <g class="EliceI">
+                            <path fill="#D1D1E3"
+                                d="M104.506 32.682c0 5.012-7.188 7.518-18.25 7.518C75.193 40.2 64 35.724 64 32.264s11.128-6.683 22.256-7.1c16.024-1.253 18.695 5.012 18.25 7.518Z"
+                                class="Ellipse 14" />
+                            <path fill="#fff"
+                                d="M102 29c1.994 2.845-3.5 5.5-17.744 5.5C73 33.3 66.5 31.322 66.5 29s6.628-3.61 17.756-3.89C100.28 24.27 102.445 27.318 102 29Z"
+                                class="Ellipse 15" />
+                            <path stroke="#41456D" stroke-width="4"
+                                d="M85.166 25.19c8.766-.731 13.473.771 15.872 2.455 2.369 1.664 2.601 3.553 2.489 4.222l-.027.163v.166c0 1.859-1.166 3.564-4.364 4.907-3.217 1.35-8.035 2.093-14.136 2.093-5.953 0-11.954-1.289-16.425-3.056-2.241-.887-4.009-1.859-5.177-2.782C62.121 32.35 62 31.758 62 31.696c0 0 .045-.496 1.291-1.364 1.144-.796 2.894-1.61 5.148-2.352 4.483-1.478 10.546-2.542 16.641-2.786l.043-.002.043-.003Z"
+                                class="Ellipse 13" />
+                        </g>
+                        <path fill="#536B91" stroke="#41456D" stroke-width="4" d="M63.55 33h-11v24h11z"
+                            class="Rectangle 4" />
+                        <circle cx="8.5" cy="8.5" r="6.5" fill="#EC8E47" stroke="#41456D" stroke-width="4"
+                            class="Ellipse 12" transform="matrix(-1 0 0 1 66.55 20)" />
+                    </g>
+                    <path fill="#38B8C7" stroke="#42476E" stroke-width="4"
+                        d="M142 164c8.408 0 16 8.918 16 21s-7.592 21-16 21c-8.408 0-16-8.918-16-21s7.592-21 16-21Z"
+                        class="Ellipse 17" />
+                    <path fill="#38B8C7" stroke="#42476E" stroke-width="4"
+                        d="M117.445 156.644c2.924 1.491 4.88 4.762 5.379 9.292.496 4.509-.506 10.01-3.239 15.371-2.733 5.361-6.596 9.403-10.538 11.65-3.959 2.256-7.755 2.595-10.679 1.105-2.923-1.491-4.879-4.762-5.378-9.292-.496-4.509.506-10.01 3.239-15.371 2.733-5.361 6.596-9.403 10.538-11.65 3.958-2.256 7.755-2.595 10.678-1.105Z"
+                        class="Ellipse 18" />
+                    <path fill="#38B8C7" stroke="#42476E" stroke-width="4"
+                        d="M165.851 157.742c2.777-1.749 6.589-1.754 10.735.137 4.128 1.882 8.341 5.559 11.546 10.651 3.206 5.092 4.7 10.48 4.612 15.016-.088 4.556-1.741 7.991-4.518 9.739-2.776 1.748-6.588 1.753-10.734-.137-4.128-1.882-8.341-5.559-11.546-10.651-3.206-5.092-4.7-10.481-4.613-15.017.089-4.556 1.741-7.99 4.518-9.738Z"
+                        class="Ellipse 19" />
+                    <circle cx="142" cy="106" r="72" fill="#fff" class="Gris" />
+                    <path fill="#D7D5E4"
+                        d="M209.705 81.453A71.866 71.866 0 0 1 214 106c0 39.765-32.235 72-72 72-37.558 0-68.397-28.757-71.705-65.453C80.332 140.225 106.856 160 138 160c39.765 0 72-32.235 72-72 0-2.207-.101-4.39-.295-6.547Z"
+                        class="Subtract" />
+                    <path fill="#37B8C6" stroke="#2D909F" stroke-width="4"
+                        d="M94.419 66h95.162C198.649 66 206 73.351 206 82.419A3.581 3.581 0 0 1 202.419 86H81.581A3.581 3.581 0 0 1 78 82.419C78 73.35 85.351 66 94.419 66Z"
+                        class="Rectangle 5" />
+                    <path fill="#37B8C6"
+                        d="M192.451 61c5.333 0 9.581 4.461 9.32 9.787l2.392 2.447 3.35 6.851A5.135 5.135 0 0 1 202.525 84H81.987A5.134 5.134 0 0 1 77 80.085l3.35-6.85 2.391-2.448C82.481 65.461 86.73 61 92.061 61h100.39Z"
+                        class="Union" />
+                    <circle cx="142" cy="106" r="70" stroke="#41456D" stroke-width="4" class="Borde" />
+                    <circle cx="142" cy="106" r="37" fill="#A2BFD6" stroke="#41456D" stroke-width="4"
+                        class="Ellipse 4" />
+                    <circle cx="142" cy="106" r="29" fill="#40456D" stroke="#63779F" stroke-width="4"
+                        class="Ellipse 5" />
+                    <g class="Lente">
+                        <circle cx="142" cy="106" r="23" fill="#2EC7CF" class="Iris" />
+                        <circle cx="142" cy="106" r="15" fill="#40456C" class="Pupila" id="pupila" />
+                        <circle cx="136" cy="100" r="4" fill="#fff" class="Reflejo1" id="reflejo1" />
+                        <circle cx="150" cy="114" r="3" fill="#fff" class="Reflejo2" id="reflejo2" />
+                    </g>
+                </g>
+                <ellipse cx="142" cy="245" fill="#000" class="Sombra" opacity=".2" rx="41.5" ry="18" />
+            </svg>
+
+        </div>
+
+        <div class="container-form">
+            <div class="form-toggle">
+                <button id="show-login">Iniciar sesión</button>
+                <button id="show-register">Registrarse</button>
+            </div>
+
+            <form id="login-form" class="form active">
+                <h2>Iniciar sesión</h2>
+                <div class="input-box">
+                    <label for="email">Correo</label>
+                    <input type="email" placeholder="example@gmail.com" name="email" id="email" required>
+                </div>
+                <div class="input-box">
+                    <label for="password">Contraseña</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <div class="buttons-form">
+                    <button type="button" id="btn-login">Entrar</button>
+                </div>
+            </form>
+
+            <form id="register-form" class="form">
+                <h2>Registrarse</h2>
+                <div class="input-box">
+                    <label for="name">Nombre completo</label>
+                    <input type="text" name="username" id="username" required>
+                </div>
+                <div class="input-box">
+                    <label for="email-register">Correo</label>
+                    <input type="email" name="email" id="email-register" required>
+                </div>
+                <div class="input-box">
+                    <label for="password-register">Contraseña</label>
+                    <input type="password" name="password" id="password-register" required>
+                </div>
+                <div class="buttons-form">
+                    <button type="submit" id="btn-register">Crear cuenta</button>
+                </div>
+            </form>
+        </div>
+
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script type="module" src="assets/js/index.js"></script>
+
+</body>
+
+</html>
