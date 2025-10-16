@@ -33,17 +33,39 @@ fronttodolist/
 │   │   └── index.js
 │   ├── pages/
 │   │   └── home.html
+│   ├── src/
+│   │   └── services/
+│   │   │   └── auth.js
+│   │   └── config.js
 ├── index.html
 ├── README.md
 ```
 
-## 🧪 Funcionalidades del Frontend
+## 📁 Descripción de carpetas y archivos
 
-- **Login**: formulario con validación, muestra token y estado
-- **Home**: 
-  - Vista principal con `header`
-  - Formulario para crear nuevas tareas.
-  - Formulario para editar tareas.
+`assets/`
+Contiene todos los recursos estáticos del proyecto.
+**css/** → Estilos específicos por vista (`index.css`, `home.css`).
+
+- **img/** → Imágenes o íconos usados en la interfaz.
+
+- **js/** → Scripts asociados a cada página del frontend.
+  - `index.js` → Lógica y eventos del login/registro.
+  - `home.js` → Manejo del CRUD de tareas y comportamiento de la vista principal.
+
+`pages`
+Contiene las páginas HTML del proyecto.
+
+- `index.html` → Página de inicio/login del usuario.
+- `home.html` → Panel principal donde se muestran y gestionan las tareas.
+
+`src`
+Código fuente de la lógica del proyecto.
+
+- **services/** → Servicios que se comunican con la API.
+  - `auth.js` → Maneja login, registro y validación de sesión.
+  - `tasks.js` → CRUD de tareas (crear, leer, actualizar, eliminar).
+- **config.js** → Configuración general (por ejemplo, API_URL o variables globales).
 
 ## 🎯 Animaciones GSAP
 
