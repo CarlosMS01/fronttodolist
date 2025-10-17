@@ -50,6 +50,7 @@ Contiene todos los recursos estáticos del proyecto.
 - **img/** → Imágenes o íconos usados en la interfaz.
 
 - **js/** → Scripts asociados a cada página del frontend.
+  - `index_animations.js` → Manejo de las animaciones que se aplican al login.
   - `index.js` → Lógica y eventos del login/registro.
   - `home.js` → Manejo del CRUD de tareas y comportamiento de la vista principal.
 
@@ -66,16 +67,3 @@ Código fuente de la lógica del proyecto.
   - `auth.js` → Maneja login, registro y validación de sesión.
   - `tasks.js` → CRUD de tareas (crear, leer, actualizar, eliminar).
 - **config.js** → Configuración general (por ejemplo, API_URL o variables globales).
-
-## 🎯 Animaciones GSAP
-
-#### Funciones disponibles en index_animations:
-- `lookCursor()` – Sigue el cursor con elementos visuales del robot.
-- `robot()` – Anima el robot y su sombra.
-- `passwordFocus()` – Oculta el ojo del robot al enfocar campos de contraseña.
-- `mostrarMensaje()` – Muestra un mensaje animado con `GSAP` (desplazamiento y opacidad).
-
-```js
-// Importar funciones
-import { lookCursor, robot, passwordFocus, mostrarMensaje } from './animaciones.js';
-```
