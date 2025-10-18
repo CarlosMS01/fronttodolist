@@ -147,6 +147,8 @@ body {
     margin: 0;
     padding-bottom: 5px;
     border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
 }
 
 .task-list {
@@ -154,7 +156,24 @@ body {
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     flex-wrap: wrap;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
 }
+
+.task-list.collapsed {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.day-toggle-label {
+    float: right;
+    font-size: var(--font-size-sm);
+    color: #555;
+    cursor: pointer;
+    user-select: none;
+}
+
 
 .task-card {
     background: #ffffff;
