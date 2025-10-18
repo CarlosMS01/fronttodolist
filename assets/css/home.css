@@ -1,0 +1,230 @@
+:root {
+    --body-bg: #e1faff;
+    /* Color de fondo para el body*/
+    --container-bg: linear-gradient(to right, #97e8fb, #0cbbe2);
+    /* Color de fondo para los contenedores: main, section */
+    --items-bg: #e1faff;
+    /* Color de fondo para botones, inputs, selects, div */
+    --task-priority-low-bg: #DCDCDC;
+    /* Color de fondo para la prioridad baja */
+    --task-priority-medium-bg: #ffdb4b;
+    /* Color de fondo para la prioridad media */
+    --task-priority-high-bg: #ff0000;
+    /* Color de fondo para la prioridad alta */
+    --task-status-pending-bg: #ffdb4b;
+    /* Color de fondo para el estado pendiende */
+    --task-status-inprocess-bg: #7d99ff;
+    /* Color de fondo para el estado en proceso */
+    --task-status-finished-bg: #57ff95;
+    /* Color de fondo para el estado terminado */
+    --font-size-xs: clamp(0.8rem, 1vw, 0.9rem);
+    /* Tamaño extra pequeño: etiquetas pequeñas, notas o elementos secundarios */
+    --font-size-sm: clamp(1rem, 1.5vw, 1.1rem);
+    /* Tamaño pequeño: base para párrafos, botones o enlaces secundarios */
+    --font-size-md: clamp(1.2rem, 2vw, 1.4rem);
+    /* Tamaño medio: subtítulos, encabezados pequeños o textos destacados */
+    --font-size-lg: clamp(1.5rem, 3vw, 2rem);
+    /* Tamaño grande: títulos principales o bloques importantes */
+    --font-size-xl: clamp(2rem, 5vw, 3rem);
+    /* Tamaño extra grande: hero text, encabezados de secciones o animaciones tipográficas */
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 10px;
+    background: var(--body-bg);
+}
+
+
+/* ================================
+    Estilos para el header principal
+================================ */
+.header {
+    background: var(--container-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.header h1 {
+    margin: 0;
+    text-align: center;
+    font-size: var(--font-size-lg);
+}
+
+.header-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.username {
+    font-size: var(--font-size-sm);
+    margin: 0;
+}
+
+/* ================================
+    Estilos para el main/dashboard
+================================ */
+.dashboard {
+    background: var(--container-bg);
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+
+/* ================================
+    Estilos para las acciones de las tareas
+================================ */
+.task-actions {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.task-new {
+    border-radius: 50%;
+    border: none;
+    width: 35px;
+    height: 35px;
+}
+
+
+/* ================================
+    Estilos para el header de las semanas
+================================ */
+.header-week {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.prev-week,
+.next-week {
+    background: var(--items-bg);
+    border: none;
+    padding: 8px 12px;
+    font-size: var(--font-size-sm);
+    text-align: center;
+}
+
+.week-range {
+    text-align: center;
+    font-size: var(--font-size-md);
+}
+
+
+/* ================================
+    Estilos para el carrusel de las tareas
+================================ */
+.week-carousel {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.day-column {
+    background: var(--items-bg);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 25px;
+}
+
+.day-column h3 {
+    font-size: var(--font-size-lg);
+    margin: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+}
+
+.task-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.task-card {
+    background: #ffffff;
+    border: 1px solid #11c6eb;
+    margin-top: 10px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.task-title {
+    margin: 0;
+    font-size: var(--font-size-md);
+}
+
+.task-description {
+    margin-top: 3px;
+    font-size: var(--font-size-sm);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.task-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.task-priority {
+    padding: 5px;
+    border-radius: 10px;
+    background: #cacaca;
+}
+
+.task-status {
+    padding: 5px;
+    border-radius: 10px;
+    background: #daa30e;
+}
+
+
+/* ================================
+    Estilos para pantallas moviles
+================================ */
+footer {
+    text-align: center;
+    font-size: var(--font-size-md);
+}
+
+
+/* ================================
+    Estilos para pantallas moviles
+================================ */
+@media (max-width: 768px) {
+    .header-actions {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        padding: 3px 0;
+    }
+
+    .task-list {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+
+    .task-info {
+        gap: 10px;
+    }
+}

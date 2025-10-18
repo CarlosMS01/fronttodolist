@@ -1,18 +1,369 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="../css/home.css">
 </head>
+
 <body>
 
-    <h1>Bienvenido</h1>
-    <p class="mensaje" id="mensaje"></p>
-    <p class="username" id="username"></p>
-    <button class="btn-logout" id="btn-logout">Cerrar sesión</button>
+    <header class="header">
+        <h1>ToDoList</h1>
+        <div class="header-actions">
+            <p class="username" id="username">Miguel Lopez Montes</p>
+            <button class="btn-logout" id="btn-logout">Cerrar sesión</button>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <div class="task-actions">
+            <button type="button" class="task-new" id="task-new">+</button>
+        </div>
+
+        <header class="header-week">
+            <span class="week-range">Semana del 12 al 18 Oct</span>
+            <div class="week">
+                <button class="prev-week">← Semana anterior</button>
+                <button class="next-week">→ Siguiente semana</button>
+            </div>
+        </header>
+
+        <section class="week-carousel">
+
+            <div class="days-container">
+                <div class="day-column">
+                    <h3 class="day">Domingo</h3>
+                    <div class="task-list">
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-column">
+                    <h3 class="day">Lunes</h3>
+                    <div class="task-list">
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-column">
+                    <h3 class="day">Martes</h3>
+                    <div class="task-list">
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-column">
+                    <h3 class="day">Miercoles</h3>
+                    <div class="task-list">
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-column">
+                    <h3 class="day">Jueves</h3>
+                    <div class="task-list">
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-column">
+                    <h3 class="day">Viernes</h3>
+                    <div class="task-list">
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-column">
+                    <h3 class="day">Sabado</h3>
+                    <div class="task-list">
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="task-card">
+                            <h4 class="task-title">
+                                Primer tarea
+                            </h4>
+                            <p class="task-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ad esse aliquid impedit
+                                dolorum pariatur consectetur laborum iste nobis asperiores quo, perferendis cupiditate
+                                quisquam at ipsum amet veritatis beatae fuga!
+                            </p>
+                            <div class="task-info">
+                                <div class="task-priority">
+                                    Prioridad: baja
+                                </div>
+                                <div class="task-status">
+                                    Estado: en proceso
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Carlos. Todos los derechos reservados.</p>
+    </footer>
 
     <script type="module" src="../js/home.js"></script>
-    
+
 </body>
+
 </html>
