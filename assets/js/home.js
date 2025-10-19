@@ -109,6 +109,36 @@ updateWeekDisplay();
 
 
 // =======================
+// Modal: formulario para nueva tarea
+// =======================
+const openTaskModal = document.getElementById('task-new');
+const closeBtn = document.getElementById('closeModalBtn');
+const modal = document.getElementById('taskModal');
+const modalContent = modal.querySelector('.modal-content');
+
+const tline = gsap.timeline({ paused: true, reversed: true });
+tline.fromTo(modalContent,
+    { y: -50, opacity: 0, scale: 0.9 },
+    { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }
+);
+
+// Abrir modal
+openTaskModal.addEventListener('click', () => {
+    modal.hidden = false;
+    tline.play();
+});
+
+// Cerrar modal
+const closeModal = () => {
+    tline.reverse();
+    tline.eventCallback("onReverseComplete", () => {
+        modal.hidden = true;
+    });
+};
+closeBtn.addEventListener('click', closeModal);
+
+
+// =======================
 // Acción y animación para ocultar las tareas
 // =======================
 document.querySelectorAll('.toggle-day').forEach(dayHeader => {

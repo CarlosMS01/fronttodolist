@@ -21,6 +21,49 @@
     <main class="dashboard">
         <div class="task-actions">
             <button type="button" class="task-new" id="task-new">+</button>
+
+            <div id="taskModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+                <div class="modal-content">
+                    <button id="closeModalBtn" aria-label="Cerrar modal">×</button>
+                    <h2 id="modalTitle">Nueva tarea</h2>
+                    <form id="taskForm">
+                        <div class="title">
+                            <label for="title-form">Título:</label>
+                            <input type="text" id="title" name="title" maxlength="100" placeholder="Título de la tarea">
+                        </div>
+                        <div class="description">
+                            <label for="description">Descripción:</label>
+                            <textarea id="description" name="description" placeholder="Detalles..."></textarea>
+                        </div>
+                        <div class="selects">
+
+                            <div class="status">
+                                <label for="status">Estado:</label>
+                                <select id="status" name="status">
+                                    <option value="pendiente" class="option-pending">Pendiente</option>
+                                    <option value="en proceso" class="option-inprocess">En proceso</option>
+                                    <option value="terminado" class="option-finished">Terminado</option>
+                                </select>
+
+                            </div>
+
+                            <div class="priority">
+                                <label for="priority">Prioridad:</label>
+                                <select id="priority" name="priority">
+                                    <option value="baja" class="option-low">Baja</option>
+                                    <option value="media" class="option-medium">Media</option>
+                                    <option value="alta" class="option-high">Alta</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" id="btn-create-task">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
 
         <header class="header-week">
@@ -98,6 +141,7 @@
         <p>&copy; 2025 Carlos. Todos los derechos reservados.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script type="module" src="../js/home.js"></script>
 
 </body>

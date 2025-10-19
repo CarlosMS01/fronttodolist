@@ -69,11 +69,12 @@ body {
     Estilos para las acciones de las tareas
 ================================ */
 .task-actions {
-    /* border: 1px solid black; */
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
+    gap: 15px;
     margin-bottom: 10px;
+    margin-right: 10px;
 }
 
 .task-new {
@@ -81,6 +82,170 @@ body {
     border: none;
     width: 35px;
     height: 35px;
+    font-size: var(--font-size-sm);
+}
+
+
+/* ================================
+    Estilos para los formularios
+================================ */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal[hidden] {
+    display: none !important;
+}
+
+.modal-content {
+    background: var(--items-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+}
+
+.modal-content-edit {
+    background: var(--items-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+}
+
+#closeModalBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: var(--font-size-lg);
+}
+
+.modal-content h2 {
+    font-size: var(--font-size-lg);
+    text-align: center;
+}
+
+#closeModalEditBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+}
+
+.modal-content-edit h2 {
+    font-size: var(--font-size-lg);
+    text-align: center;
+}
+
+.form-actions-edit {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 15px;
+}
+
+.title,
+.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.title label {
+    font-size: var(--font-size-sm);
+    margin-bottom: 2px;
+}
+
+.title input {
+    border: 1px solid rgb(48, 47, 47);
+    border-radius: 3px;
+    padding: 3px;
+}
+
+.description label {
+    font-size: var(--font-size-sm);
+    margin-bottom: 2px;
+}
+
+.description textarea {
+    resize: none;
+    border: 1px solid rgb(48, 47, 47);
+    border-radius: 3px;
+    padding: 3px;
+    height: 70px;
+}
+
+.selects {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    font-size: var(--font-size-sm);
+}
+
+.selects .status,
+.priority {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.selects .status select {
+    border: 1px solid rgb(48, 47, 47);
+    border-radius: 3px;
+}
+
+.option-pending {
+    background: var(--task-status-pending-bg);
+}
+
+.option-inprocess {
+    background: var(--task-status-inprocess-bg);
+}
+
+.option-finished {
+    background: var(--task-status-finished-bg);
+}
+
+.selects .priority select {
+    border: 1px solid rgb(48, 47, 47);
+    border-radius: 3px;
+}
+
+.option-low {
+    background: var(--task-priority-low-bg);
+}
+
+.option-medium {
+    background: var(--task-priority-medium-bg);
+}
+
+.option-high {
+    background: var(--task-priority-high-bg);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 30px;
+    margin-top: 10px;
+    font-size: var(--font-size-sm);
 }
 
 
@@ -93,6 +258,11 @@ body {
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
+    gap: 15px;
+}
+
+.week {
+    display: flex;
     gap: 15px;
 }
 
@@ -222,6 +392,17 @@ footer {
         justify-content: end;
         align-items: center;
         padding: 3px 0;
+    }
+
+    .prev-week,
+    .next-week {
+        flex: 1;
+    }
+
+    .task-actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .task-list {
