@@ -1,9 +1,19 @@
 import { getCurrentUser, logout } from '../src/services/auth.js';
+import { getTasks } from '../src/services/tasks.js';
 
 
 // =======================
 // Obtener el usuario y cargar tareas
 // =======================
+window.addEventListener('DOMContentLoaded', async () => {
+    const user = await getCurrentUser();
+
+    if (user.error || !user.username) {
+        document.getElementById('mensaje').textContent = "No hay un usuario";
+    } else {
+        document.getElementById('username').textContent = user.username;
+    }
+});
 
 
 // =======================
@@ -21,17 +31,6 @@ const nextBtn = document.querySelector('.next-week');
 const dayColumns = document.querySelectorAll('.day-column');
 
 let currentDate = new Date();
-
-// Función simulada (sustituye con tu real get_tasks)
-async function get_tasks() {
-    return [
-        { id: 1, title: "Comprar pan", created_at: "2025-10-19T10:00:00Z" },
-        { id: 2, title: "Ir al gym", created_at: "2025-10-17T09:30:00Z" },
-        { id: 3, title: "Estudiar JS", created_at: "2025-10-20T15:00:00Z" },
-        { id: 4, title: "Llamar a Juan", created_at: "2025-10-21T12:00:00Z" },
-        { id: 5, title: "Estudiar JS", created_at: "2025-10-29T15:00:00Z" }
-    ];
-}
 
 // Función para obtener el inicio y fin de semana (domingo a sábado)
 function getWeekRange(date) {
@@ -63,29 +62,37 @@ function updateWeekDisplay() {
 
 // Cargar tareas del usuario por semana
 async function loadTasksForWeek(startOfWeek, endOfWeek) {
-    const tasks = await get_tasks();
+    try {
+        const tasks = await getTasks();
 
-    // Limpiar listas previas
-    dayColumns.forEach(col => col.querySelector('.task-list').innerHTML = '');
+        if (!tasks) {
+            console.log("No tienes tareas para esta semana");
+        } else {
+            // Limpiar listas previas
+            dayColumns.forEach(col => col.querySelector('.task-list').innerHTML = '');
 
-    // Filtrar tareas de esta semana
-    const weekTasks = tasks.filter(t => {
-        const created = new Date(t.created_at);
-        return created >= startOfWeek && created <= endOfWeek;
-    });
+            // Filtrar tareas de esta semana
+            const weekTasks = tasks.filter(t => {
+                const created = new Date(t.created_at);
+                return created >= startOfWeek && created <= endOfWeek;
+            });
 
-    // Insertar cada tarea en su día correspondiente
-    weekTasks.forEach(t => {
-        const created = new Date(t.created_at);
-        const dayIndex = created.getDay();
-        const taskList = dayColumns[dayIndex].querySelector('.task-list');
+            // Insertar cada tarea en su día correspondiente
+            weekTasks.forEach(t => {
+                const created = new Date(t.created_at);
+                const dayIndex = created.getDay();
+                const taskList = dayColumns[dayIndex].querySelector('.task-list');
 
-        const div = document.createElement('div');
-        div.className = 'task-item';
-        div.textContent = t.title;
+                const div = document.createElement('div');
+                div.className = 'task-item';
+                div.textContent = t.title;
 
-        taskList.appendChild(div);
-    });
+                taskList.appendChild(div);
+            });
+        }
+    } catch (err) {
+        console.log("Error de conexión con el servidor");
+    }
 }
 
 prevBtn.addEventListener('click', () => {
