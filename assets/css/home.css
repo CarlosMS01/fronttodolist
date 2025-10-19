@@ -1,32 +1,18 @@
 :root {
-    --body-bg: #e1faff;
-    /* Color de fondo para el body*/
-    --container-bg: linear-gradient(to right, #97e8fb, #0cbbe2);
-    /* Color de fondo para los contenedores: main, section */
-    --items-bg: #e1faff;
-    /* Color de fondo para botones, inputs, selects, div */
-    --task-priority-low-bg: #DCDCDC;
-    /* Color de fondo para la prioridad baja */
-    --task-priority-medium-bg: #ffdb4b;
-    /* Color de fondo para la prioridad media */
-    --task-priority-high-bg: #ff0000;
-    /* Color de fondo para la prioridad alta */
-    --task-status-pending-bg: #ffdb4b;
-    /* Color de fondo para el estado pendiende */
-    --task-status-inprocess-bg: #7d99ff;
-    /* Color de fondo para el estado en proceso */
-    --task-status-finished-bg: #57ff95;
-    /* Color de fondo para el estado terminado */
-    --font-size-xs: clamp(0.8rem, 1vw, 0.9rem);
-    /* Tamaño extra pequeño: etiquetas pequeñas, notas o elementos secundarios */
-    --font-size-sm: clamp(1rem, 1.5vw, 1.1rem);
-    /* Tamaño pequeño: base para párrafos, botones o enlaces secundarios */
-    --font-size-md: clamp(1.2rem, 2vw, 1.4rem);
-    /* Tamaño medio: subtítulos, encabezados pequeños o textos destacados */
-    --font-size-lg: clamp(1.5rem, 3vw, 2rem);
-    /* Tamaño grande: títulos principales o bloques importantes */
-    --font-size-xl: clamp(2rem, 5vw, 3rem);
-    /* Tamaño extra grande: hero text, encabezados de secciones o animaciones tipográficas */
+    --body-bg: #e1faff;                                                 /* Color de fondo para el body*/
+    --container-bg: linear-gradient(to right, #97e8fb, #0cbbe2);      /* Color de fondo para los contenedores: main, section */
+    --items-bg: #e1faff;                                                /* Color de fondo para botones, inputs, selects, div */
+    --task-priority-low-bg: #DCDCDC;                                    /* Color de fondo para la prioridad baja */
+    --task-priority-medium-bg: #ffdb4b;                                 /* Color de fondo para la prioridad media */
+    --task-priority-high-bg: #ff0000;                                   /* Color de fondo para la prioridad alta */
+    --task-status-pending-bg: #ffdb4b;                                  /* Color de fondo para el estado pendiende */
+    --task-status-inprocess-bg: #7d99ff;                                /* Color de fondo para el estado en proceso */
+    --task-status-finished-bg: #57ff95;                                 /* Color de fondo para el estado terminado */
+    --font-size-xs: clamp(0.8rem, 1vw, 0.9rem);                           /* Tamaño extra pequeño: etiquetas pequeñas, notas o elementos secundarios */
+    --font-size-sm: clamp(1rem, 1.5vw, 1.1rem);                           /* Tamaño pequeño: base para párrafos, botones o enlaces secundarios */
+    --font-size-md: clamp(1.2rem, 2vw, 1.4rem);                           /* Tamaño medio: subtítulos, encabezados pequeños o textos destacados */
+    --font-size-lg: clamp(1.5rem, 3vw, 2rem);                             /* Tamaño grande: títulos principales o bloques importantes */
+    --font-size-xl: clamp(2rem, 5vw, 3rem);                               /* Tamaño extra grande: hero text, encabezados de secciones o animaciones tipográficas */
 }
 
 body {
@@ -50,7 +36,7 @@ body {
 }
 
 .header h1 {
-    margin: 0;
+    margin: 0 5px 0 0;
     text-align: center;
     font-size: var(--font-size-lg);
 }
