@@ -1,5 +1,5 @@
 import { getCurrentUser, logout } from '../src/services/auth.js';
-import { getTasks } from '../src/services/tasks.js';
+import { getTasks, createTask } from '../src/services/tasks.js';
 
 
 // =======================
@@ -20,6 +20,22 @@ window.addEventListener('DOMContentLoaded', async () => {
 // Cerrar sesión
 // =======================
 document.getElementById('btn-logout').addEventListener('click', () => { logout(); });
+
+
+// =======================
+// Acción y animación para ocultar las tareas
+// =======================
+document.querySelectorAll('.toggle-day').forEach(dayHeader => {
+    const taskList = dayHeader.nextElementSibling;
+    const label = dayHeader.querySelector('.day-toggle-label');
+
+    dayHeader.addEventListener('click', () => {
+        taskList.classList.toggle('collapsed');
+
+        const isCollapsed = taskList.classList.contains('collapsed');
+        label.textContent = isCollapsed ? 'Mostrar ▼' : 'Ocultar ▲';
+    });
+});
 
 
 // =======================
@@ -65,31 +81,67 @@ async function loadTasksForWeek(startOfWeek, endOfWeek) {
     try {
         const tasks = await getTasks();
 
-        if (!tasks) {
+        if (!tasks || tasks.length === 0) {
             console.log("No tienes tareas para esta semana");
-        } else {
-            // Limpiar listas previas
-            dayColumns.forEach(col => col.querySelector('.task-list').innerHTML = '');
-
-            // Filtrar tareas de esta semana
-            const weekTasks = tasks.filter(t => {
-                const created = new Date(t.created_at);
-                return created >= startOfWeek && created <= endOfWeek;
-            });
-
-            // Insertar cada tarea en su día correspondiente
-            weekTasks.forEach(t => {
-                const created = new Date(t.created_at);
-                const dayIndex = created.getDay();
-                const taskList = dayColumns[dayIndex].querySelector('.task-list');
-
-                const div = document.createElement('div');
-                div.className = 'task-item';
-                div.textContent = t.title;
-
-                taskList.appendChild(div);
-            });
+            return;
         }
+
+        // Limpiar listas previas
+        dayColumns.forEach(col => col.querySelector('.task-list').innerHTML = '');
+
+        // Filtrar tareas de esta semana
+        const weekTasks = tasks.filter(t => {
+            const created = new Date(t.created_at);
+            return created >= startOfWeek && created <= endOfWeek;
+        });
+
+        // Insertar cada tarea en su día correspondiente
+        weekTasks.forEach(t => {
+            const created = new Date(t.created_at);
+            const dayIndex = created.getDay();
+            const taskList = dayColumns[dayIndex].querySelector('.task-list');
+
+            // Crear el contenedor principal de la tarea
+            const card = document.createElement('div');
+            card.className = 'task-card';
+
+            // Título
+            const title = document.createElement('h4');
+            title.className = 'task-title';
+            title.textContent = t.title;
+
+            // Descripción
+            const desc = document.createElement('p');
+            desc.className = 'task-description';
+            desc.textContent = t.description || "Sin descripción";
+
+            // Contenedor de información adicional
+            const info = document.createElement('div');
+            info.className = 'task-info';
+
+            // Prioridad
+            const priority = document.createElement('div');
+            priority.className = `task-priority ${t.priority}`;
+            priority.textContent = `Prioridad: ${t.priority}`;
+
+            // Estado
+            const statusClass = t.status.replace(/\s+/g, '-');
+            const status = document.createElement('div');
+            status.className = `task-status ${statusClass}`;
+            status.textContent = `Estado: ${t.status}`;
+
+            // Añadir prioridad y estado dentro del div info
+            info.appendChild(priority);
+            info.appendChild(status);
+
+            // Agregar todo al card
+            card.appendChild(title);
+            card.appendChild(desc);
+            card.appendChild(info);
+
+            // Insertar la tarjeta en el día correspondiente
+            taskList.appendChild(card);
+        });
     } catch (err) {
         console.log("Error de conexión con el servidor");
     }
@@ -133,22 +185,90 @@ const closeModal = () => {
     tline.reverse();
     tline.eventCallback("onReverseComplete", () => {
         modal.hidden = true;
+        document.getElementById("taskForm").reset();
     });
 };
 closeBtn.addEventListener('click', closeModal);
 
 
 // =======================
-// Acción y animación para ocultar las tareas
+// Dormulario: crear nueva tarea
 // =======================
-document.querySelectorAll('.toggle-day').forEach(dayHeader => {
-    const taskList = dayHeader.nextElementSibling;
-    const label = dayHeader.querySelector('.day-toggle-label');
+const btnCreateTask = document.getElementById('btn-create-task');
 
-    dayHeader.addEventListener('click', () => {
-        taskList.classList.toggle('collapsed');
+async function createTaskModal() {
+    btnCreateTask.disabled = true;
+    btnCreateTask.textContent = "Procesando...";
 
-        const isCollapsed = taskList.classList.contains('collapsed');
-        label.textContent = isCollapsed ? 'Mostrar ▼' : 'Ocultar ▲';
-    });
+    const title = document.getElementById('title');
+    const description = document.getElementById('description');
+
+    const status = document.getElementById('status');
+    const selectedStatus = status.value;
+
+    const priority = document.getElementById('priority');
+    const selectedPriority = priority.value;
+
+    const fieldsTask = {
+        title: title.value.trim(),
+        description: description.value.trim()
+    };
+
+    const errorsTask = validateFields(fieldsTask);
+
+    if (errorsTask.length > 0) {
+        btnCreateTask.disabled = false;
+        btnCreateTask.textContent = "Guardar";
+        return;
+    }
+
+    const data = {
+        title: title.value.trim(),
+        description: description.value.trim(),
+        status: selectedStatus,
+        priority: selectedPriority
+    };
+
+    try {
+        const res = await createTask(data);
+
+        if (res.message) {
+            console.log("Tarea creada exitosamente");
+            document.getElementById("taskForm").reset();
+            updateWeekDisplay();
+        } else {
+            console.log("Error en el registro");
+        }
+    } catch {
+        console.log("Error de conexión con el servidor");
+    } finally {
+        btnCreateTask.disabled = false;
+        btnCreateTask.textContent = "Guardar";
+    }
+}
+
+document.getElementById('taskForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    createTaskModal();
+    closeModal();
 });
+
+
+// =======================
+// Validaciones para los campos { title, description }
+// =======================
+function validateFields({ title, description }) {
+
+    const errores = [];
+
+    if (!title || !/^[\p{L}\p{N}\p{P}\p{Zs}]+$/u.test(title.trim())) {
+        errores.push("El titulo contiene caracteres inválidos.");
+    }
+
+
+    if (!description || !/^[\p{L}\p{N}\p{P}\p{Zs}]+$/u.test(description.trim())) {
+        errores.push("La descripción contiene caracteres inválidos.");
+    }
+
+    return errores;
+}
