@@ -7,3 +7,13 @@ export async function getTasks() {
     });
     return res.json();
 }
+
+export async function createTask({ title, description, status, priority }) {
+    const res = await fetch(`${API_URL}/api/tasks`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, description, status, priority }),
+        credentials: 'include'
+    });
+    return res.json();
+}

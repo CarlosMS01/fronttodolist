@@ -1,5 +1,5 @@
 import { getCurrentUser, logout } from '../src/services/auth.js';
-import { getTasks } from '../src/services/tasks.js';
+import { getTasks, createTask } from '../src/services/tasks.js';
 
 
 // =======================
@@ -20,6 +20,22 @@ window.addEventListener('DOMContentLoaded', async () => {
 // Cerrar sesión
 // =======================
 document.getElementById('btn-logout').addEventListener('click', () => { logout(); });
+
+
+// =======================
+// Acción y animación para ocultar las tareas
+// =======================
+document.querySelectorAll('.toggle-day').forEach(dayHeader => {
+    const taskList = dayHeader.nextElementSibling;
+    const label = dayHeader.querySelector('.day-toggle-label');
+
+    dayHeader.addEventListener('click', () => {
+        taskList.classList.toggle('collapsed');
+
+        const isCollapsed = taskList.classList.contains('collapsed');
+        label.textContent = isCollapsed ? 'Mostrar ▼' : 'Ocultar ▲';
+    });
+});
 
 
 // =======================
@@ -169,22 +185,90 @@ const closeModal = () => {
     tline.reverse();
     tline.eventCallback("onReverseComplete", () => {
         modal.hidden = true;
+        document.getElementById("taskForm").reset();
     });
 };
 closeBtn.addEventListener('click', closeModal);
 
 
 // =======================
-// Acción y animación para ocultar las tareas
+// Dormulario: crear nueva tarea
 // =======================
-document.querySelectorAll('.toggle-day').forEach(dayHeader => {
-    const taskList = dayHeader.nextElementSibling;
-    const label = dayHeader.querySelector('.day-toggle-label');
+const btnCreateTask = document.getElementById('btn-create-task');
 
-    dayHeader.addEventListener('click', () => {
-        taskList.classList.toggle('collapsed');
+async function createTaskModal() {
+    btnCreateTask.disabled = true;
+    btnCreateTask.textContent = "Procesando...";
 
-        const isCollapsed = taskList.classList.contains('collapsed');
-        label.textContent = isCollapsed ? 'Mostrar ▼' : 'Ocultar ▲';
-    });
+    const title = document.getElementById('title');
+    const description = document.getElementById('description');
+
+    const status = document.getElementById('status');
+    const selectedStatus = status.value;
+
+    const priority = document.getElementById('priority');
+    const selectedPriority = priority.value;
+
+    const fieldsTask = {
+        title: title.value.trim(),
+        description: description.value.trim()
+    };
+
+    const errorsTask = validateFields(fieldsTask);
+
+    if (errorsTask.length > 0) {
+        btnCreateTask.disabled = false;
+        btnCreateTask.textContent = "Guardar";
+        return;
+    }
+
+    const data = {
+        title: title.value.trim(),
+        description: description.value.trim(),
+        status: selectedStatus,
+        priority: selectedPriority
+    };
+
+    try {
+        const res = await createTask(data);
+
+        if (res.message) {
+            console.log("Tarea creada exitosamente");
+            document.getElementById("taskForm").reset();
+            updateWeekDisplay();
+        } else {
+            console.log("Error en el registro");
+        }
+    } catch {
+        console.log("Error de conexión con el servidor");
+    } finally {
+        btnCreateTask.disabled = false;
+        btnCreateTask.textContent = "Guardar";
+    }
+}
+
+document.getElementById('taskForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    createTaskModal();
+    closeModal();
 });
+
+
+// =======================
+// Validaciones para los campos { title, description }
+// =======================
+function validateFields({ title, description }) {
+
+    const errores = [];
+
+    if (!title || !/^[\p{L}\p{N}\p{P}\p{Zs}]+$/u.test(title.trim())) {
+        errores.push("El titulo contiene caracteres inválidos.");
+    }
+
+
+    if (!description || !/^[\p{L}\p{N}\p{P}\p{Zs}]+$/u.test(description.trim())) {
+        errores.push("La descripción contiene caracteres inválidos.");
+    }
+
+    return errores;
+}
