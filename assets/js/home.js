@@ -65,31 +65,67 @@ async function loadTasksForWeek(startOfWeek, endOfWeek) {
     try {
         const tasks = await getTasks();
 
-        if (!tasks) {
+        if (!tasks || tasks.length === 0) {
             console.log("No tienes tareas para esta semana");
-        } else {
-            // Limpiar listas previas
-            dayColumns.forEach(col => col.querySelector('.task-list').innerHTML = '');
-
-            // Filtrar tareas de esta semana
-            const weekTasks = tasks.filter(t => {
-                const created = new Date(t.created_at);
-                return created >= startOfWeek && created <= endOfWeek;
-            });
-
-            // Insertar cada tarea en su día correspondiente
-            weekTasks.forEach(t => {
-                const created = new Date(t.created_at);
-                const dayIndex = created.getDay();
-                const taskList = dayColumns[dayIndex].querySelector('.task-list');
-
-                const div = document.createElement('div');
-                div.className = 'task-item';
-                div.textContent = t.title;
-
-                taskList.appendChild(div);
-            });
+            return;
         }
+
+        // Limpiar listas previas
+        dayColumns.forEach(col => col.querySelector('.task-list').innerHTML = '');
+
+        // Filtrar tareas de esta semana
+        const weekTasks = tasks.filter(t => {
+            const created = new Date(t.created_at);
+            return created >= startOfWeek && created <= endOfWeek;
+        });
+
+        // Insertar cada tarea en su día correspondiente
+        weekTasks.forEach(t => {
+            const created = new Date(t.created_at);
+            const dayIndex = created.getDay();
+            const taskList = dayColumns[dayIndex].querySelector('.task-list');
+
+            // Crear el contenedor principal de la tarea
+            const card = document.createElement('div');
+            card.className = 'task-card';
+
+            // Título
+            const title = document.createElement('h4');
+            title.className = 'task-title';
+            title.textContent = t.title;
+
+            // Descripción
+            const desc = document.createElement('p');
+            desc.className = 'task-description';
+            desc.textContent = t.description || "Sin descripción";
+
+            // Contenedor de información adicional
+            const info = document.createElement('div');
+            info.className = 'task-info';
+
+            // Prioridad
+            const priority = document.createElement('div');
+            priority.className = `task-priority ${t.priority}`;
+            priority.textContent = `Prioridad: ${t.priority}`;
+
+            // Estado
+            const statusClass = t.status.replace(/\s+/g, '-');
+            const status = document.createElement('div');
+            status.className = `task-status ${statusClass}`;
+            status.textContent = `Estado: ${t.status}`;
+
+            // Añadir prioridad y estado dentro del div info
+            info.appendChild(priority);
+            info.appendChild(status);
+
+            // Agregar todo al card
+            card.appendChild(title);
+            card.appendChild(desc);
+            card.appendChild(info);
+
+            // Insertar la tarjeta en el día correspondiente
+            taskList.appendChild(card);
+        });
     } catch (err) {
         console.log("Error de conexión con el servidor");
     }

@@ -362,15 +362,37 @@ body {
 }
 
 .task-priority {
-    padding: 5px;
+    padding: 7px;
     border-radius: 10px;
-    background: #cacaca;
+}
+
+.task-priority.baja {
+    background: var(--task-priority-low-bg)
+}
+
+.task-priority.media {
+    background: var(--task-priority-medium-bg)
+}
+
+.task-priority.alta {
+    background: var(--task-priority-high-bg)
 }
 
 .task-status {
-    padding: 5px;
+    padding: 7px;
     border-radius: 10px;
-    background: #daa30e;
+}
+
+.task-status.pendiente {
+    background: var(--task-status-pending-bg);
+}
+
+.task-status.en-progreso {
+    background: var(--task-status-inprocess-bg);
+}
+
+.task-status.completada {
+    background: var(--task-status-finished-bg);
 }
 
 
