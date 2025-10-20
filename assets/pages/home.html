@@ -64,6 +64,48 @@
                 </div>
             </div>
 
+            <div id="taskModalEdit" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+                <div class="modal-content-edit">
+                    <button type="button" id="closeModalEditBtn" aria-label="Cerrar modal">×</button>
+                    <h2 id="modalTitle">Editar tarea</h2>
+                    <form id="taskFormEdit">
+                        <div class="title">
+                            <label for="title-edit">Título:</label>
+                            <input type="text" id="title-edit" name="title-edit" maxlength="100">
+                        </div>
+                        <div class="description">
+                            <label for="description-edit">Descripción:</label>
+                            <textarea id="description-edit" name="description-edit"></textarea>
+                        </div>
+                        <div class="selects">
+
+                            <div class="status">
+                                <label for="status-edit">Estado:</label>
+                                <select id="status-edit" name="status-edit">
+                                    <option value="pendiente" class="option-pending">Pendiente</option>
+                                    <option value="en progreso" class="option-inprocess">En progreso</option>
+                                    <option value="completada" class="option-finished">Completada</option>
+                                </select>
+
+                            </div>
+
+                            <div class="priority">
+                                <label for="priority-edit">Prioridad:</label>
+                                <select id="priority-edit" name="priority-edit">
+                                    <option value="baja" class="option-low">Baja</option>
+                                    <option value="media" class="option-medium">Media</option>
+                                    <option value="alta" class="option-high">Alta</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-actions-edit">
+                            <button type="button" id="btn-delete-task">Eliminar</button>
+                            <button type="submit" id="btn-edit-task">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <header class="header-week">

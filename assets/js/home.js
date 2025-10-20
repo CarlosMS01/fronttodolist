@@ -1,5 +1,5 @@
 import { getCurrentUser, logout } from '../src/services/auth.js';
-import { getTasks, createTask } from '../src/services/tasks.js';
+import { getTasks, createTask, getTask, updateTask, deleteTask } from '../src/services/tasks.js';
 
 
 // =======================
@@ -104,6 +104,7 @@ async function loadTasksForWeek(startOfWeek, endOfWeek) {
             // Crear el contenedor principal de la tarea
             const card = document.createElement('div');
             card.className = 'task-card';
+            card.dataset.id = t.id;
 
             // Título
             const title = document.createElement('h4');
@@ -161,7 +162,7 @@ updateWeekDisplay();
 
 
 // =======================
-// Modal: formulario para nueva tarea
+// Modal: animaciones para nueva tarea
 // =======================
 const openTaskModal = document.getElementById('task-new');
 const closeBtn = document.getElementById('closeModalBtn');
@@ -192,7 +193,7 @@ closeBtn.addEventListener('click', closeModal);
 
 
 // =======================
-// Dormulario: crear nueva tarea
+// Formulario: crear nueva tarea
 // =======================
 const btnCreateTask = document.getElementById('btn-create-task');
 
@@ -255,16 +256,137 @@ document.getElementById('taskForm').addEventListener('submit', (e) => {
 
 
 // =======================
+// Modal: animaciones para editar tarea
+// =======================
+const closeEditBtn = document.getElementById('closeModalEditBtn');
+const modalEdit = document.getElementById('taskModalEdit');
+const modalContentEdit = modalEdit.querySelector('.modal-content-edit');
+
+const mLine = gsap.timeline({ paused: true, reversed: true });
+mLine.fromTo(modalContentEdit,
+    { y: -50, opacity: 0, scale: 0.9 },
+    { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }
+);
+
+const closeEditModal = () => {
+    mLine.reverse();
+    mLine.eventCallback("onReverseComplete", () => {
+        modalEdit.hidden = true;
+        document.getElementById("taskForm").reset();
+    });
+};
+closeEditBtn.addEventListener('click', closeEditModal);
+
+
+// =======================
+// Click: mostrar informacion de una tarea en el formulario
+// =======================
+document.addEventListener('click', async e => {
+
+    const card = e.target.closest('.task-card');
+    if (!card) return;
+
+    const idTarea = card.dataset.id;
+
+    try {
+        const tarea = await getTask(idTarea);
+
+        if (tarea.error) {
+            console.error(tarea.error);
+            return;
+        }
+
+        document.getElementById('title-edit').value = tarea.title;
+        document.getElementById('description-edit').value = tarea.description;
+        document.getElementById('status-edit').value = tarea.status;
+        document.getElementById('priority-edit').value = tarea.priority;
+
+        document.getElementById('taskFormEdit').dataset.id = tarea.id;
+
+        if (mLine.reversed()) {
+            modalEdit.hidden = false;
+            mLine.play();
+        }
+    } catch {
+        console.log("Error al obtener la tarea");
+    }
+
+});
+
+
+// =======================
+// Formulario: editar una tarea
+// =======================
+const btnEditTask = document.getElementById('btn-edit-task');
+
+async function editTaskModal() {
+    btnEditTask.disabled = true;
+    btnEditTask.textContent = "Procesando...";
+
+    const title = document.getElementById('title-edit');
+    const description = document.getElementById('description-edit');
+
+    const status = document.getElementById('status-edit');
+    const selectedStatus = status.value;
+
+    const priority = document.getElementById('priority-edit');
+    const selectedPriority = priority.value;
+
+    const fieldsTask = {
+        title: title.value.trim(),
+        description: description.value.trim()
+    };
+
+    const errorsTask = validateFields(fieldsTask);
+
+    if (errorsTask.length > 0) {
+        btnEditTask.disabled = false;
+        btnEditTask.textContent = "Guardar";
+        return;
+    }
+
+    const data = {
+        title: title.value.trim(),
+        description: description.value.trim(),
+        status: selectedStatus,
+        priority: selectedPriority
+    };
+
+    try {
+        const idTarea = document.getElementById('taskFormEdit').dataset.id;
+        const res = await updateTask(idTarea, data);
+
+        if (res.message) {
+            console.log("Tarea actualizada exitosamente");
+            document.getElementById("taskForm").reset();
+            updateWeekDisplay();
+        } else {
+            console.log("Error en el registro");
+        }
+    } catch {
+        console.log("Error de conexión con el servidor");
+    } finally {
+        btnEditTask.disabled = false;
+        btnEditTask.textContent = "Guardar";
+    }
+}
+
+document.getElementById('taskFormEdit').addEventListener('submit', (e) => {
+    e.preventDefault();
+    editTaskModal();
+    closeEditModal();
+});
+
+
+// =======================
 // Validaciones para los campos { title, description }
 // =======================
 function validateFields({ title, description }) {
-
     const errores = [];
 
     if (!title || !/^[\p{L}\p{N}\p{P}\p{Zs}]+$/u.test(title.trim())) {
         errores.push("El titulo contiene caracteres inválidos.");
     }
-
 
     if (!description || !/^[\p{L}\p{N}\p{P}\p{Zs}]+$/u.test(description.trim())) {
         errores.push("La descripción contiene caracteres inválidos.");
