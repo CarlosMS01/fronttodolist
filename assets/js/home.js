@@ -3,6 +3,21 @@ import { getTasks, createTask, getTask, updateTask, deleteTask } from '../src/se
 
 
 // =======================
+// Función centralizada de alertas
+// =======================
+function showAlert(icon, title, text, timer = 0, html = null) {
+    Swal.fire({
+        icon,
+        title,
+        text: html ? undefined : text,
+        html: html || undefined,
+        showConfirmButton: !timer,
+        timer: timer || undefined
+    });
+}
+
+
+// =======================
 // Obtener el usuario y cargar tareas
 // =======================
 window.addEventListener('DOMContentLoaded', async () => {
@@ -144,7 +159,7 @@ async function loadTasksForWeek(startOfWeek, endOfWeek) {
             taskList.appendChild(card);
         });
     } catch (err) {
-        console.log("Error de conexión con el servidor");
+        showAlert('error', 'Error de conexión', 'No se pudo conectar con el servidor. Intenta nuevamente.');
     }
 }
 
@@ -218,6 +233,7 @@ async function createTaskModal() {
     const errorsTask = validateFields(fieldsTask);
 
     if (errorsTask.length > 0) {
+        showAlert('warning', 'Campos incompletos', '', 0, errorsTask.join('<br>'));
         btnCreateTask.disabled = false;
         btnCreateTask.textContent = "Guardar";
         return;
@@ -234,14 +250,16 @@ async function createTaskModal() {
         const res = await createTask(data);
 
         if (res.message) {
-            console.log("Tarea creada exitosamente");
-            document.getElementById("taskForm").reset();
-            updateWeekDisplay();
+            showAlert('success', 'Tarea creada exitosamente', '', 2000);
+            setTimeout(() => {
+                document.getElementById("taskForm").reset();
+                updateWeekDisplay();
+            }, 1500);
         } else {
-            console.log("Error en el registro");
+            showAlert('error', 'Error en el registro', '');
         }
     } catch {
-        console.log("Error de conexión con el servidor");
+        showAlert('error', 'Error de conexión', 'No se pudo conectar con el servidor. Intenta nuevamente.');
     } finally {
         btnCreateTask.disabled = false;
         btnCreateTask.textContent = "Guardar";
@@ -292,7 +310,11 @@ document.addEventListener('click', async e => {
         const tarea = await getTask(idTarea);
 
         if (tarea.error) {
-            console.error(tarea.error);
+            showAlert(
+                'error',
+                'Error al obtener la tarea',
+                tarea.error.message || 'Ocurrió un problema al cargar los datos'
+            );
             return;
         }
 
@@ -308,7 +330,7 @@ document.addEventListener('click', async e => {
             mLine.play();
         }
     } catch {
-        console.log("Error al obtener la tarea");
+        showAlert('error', 'Error al obtener la tarea', 'Ocurrió un problema al cargar los datos');
     }
 
 });
@@ -340,6 +362,7 @@ async function editTaskModal() {
     const errorsTask = validateFields(fieldsTask);
 
     if (errorsTask.length > 0) {
+        showAlert('warning', 'Campos incompletos', '', 0, errorsTask.join('<br>'));
         btnEditTask.disabled = false;
         btnEditTask.textContent = "Guardar";
         return;
@@ -357,14 +380,16 @@ async function editTaskModal() {
         const res = await updateTask(idTarea, data);
 
         if (res.message) {
-            console.log("Tarea actualizada exitosamente");
-            document.getElementById("taskForm").reset();
-            updateWeekDisplay();
+            showAlert('success', 'Tarea actualizada exitosamente', '', 2000);
+            setTimeout(() => {
+                document.getElementById("taskForm").reset();
+                updateWeekDisplay();
+            }, 1500);
         } else {
-            console.log("Error en el registro");
+            showAlert('error', 'Error en el registro', '');
         }
     } catch {
-        console.log("Error de conexión con el servidor");
+        showAlert('error', 'Error de conexión', 'No se pudo conectar con el servidor. Intenta nuevamente.');
     } finally {
         btnEditTask.disabled = false;
         btnEditTask.textContent = "Guardar";
