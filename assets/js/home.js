@@ -419,3 +419,41 @@ function validateFields({ title, description }) {
 
     return errores;
 }
+
+
+// =======================
+// Eliminación de una tarea
+// =======================
+const btnDeleteTask = document.getElementById('btn-delete-task');
+
+btnDeleteTask.addEventListener('click', async () => {
+    const idTarea = document.getElementById('taskFormEdit').dataset.id;
+    if (!idTarea) return;
+
+    Swal.fire({
+        title: '¿Seguro que deseas eliminar esta tarea?',
+        text: "Esta acción no se puede deshacer.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+        if (!result.isConfirmed) return;
+
+        try {
+            const res = await deleteTask(idTarea);
+
+            if (res.message) {
+                showAlert('success', 'Tarea eliminada', res.message, 2000);
+                closeEditModal();
+                updateWeekDisplay();
+            } else {
+                showAlert('error', 'Error', res.error || "Error al eliminar");
+            }
+        } catch (err) {
+            showAlert('error', 'Error de conexión', "Error de conexión con el servidor");
+        }
+    });
+});
