@@ -115,32 +115,3 @@ export function passwordFocus() {
         });
     });
 }
-
-
-// =======================
-// Animación para mensaje de estatus
-// =======================
-export function mostrarMensaje(tipo, texto) {
-    const contenedor = document.getElementById('mensaje-flash');
-    const mensaje = document.getElementById('mensaje-texto');
-
-    contenedor.className = `flash ${tipo}`;
-    mensaje.textContent = texto;
-
-    contenedor.classList.remove('oculto');
-
-    gsap.fromTo(contenedor,
-        { y: -50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }
-    );
-
-    setTimeout(() => {
-        gsap.to(contenedor, {
-            y: -50,
-            opacity: 0,
-            duration: 0.6,
-            ease: 'power2.in',
-            onComplete: () => contenedor.classList.add('oculto')
-        });
-    }, 3000);
-}
