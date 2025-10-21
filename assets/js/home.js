@@ -1,5 +1,20 @@
 import { getCurrentUser, logout } from '../src/services/auth.js';
-import { getTasks, createTask } from '../src/services/tasks.js';
+import { getTasks, createTask, getTask, updateTask, deleteTask } from '../src/services/tasks.js';
+
+
+// =======================
+// Función centralizada de alertas
+// =======================
+function showAlert(icon, title, text, timer = 0, html = null) {
+    Swal.fire({
+        icon,
+        title,
+        text: html ? undefined : text,
+        html: html || undefined,
+        showConfirmButton: !timer,
+        timer: timer || undefined
+    });
+}
 
 
 // =======================
@@ -104,6 +119,7 @@ async function loadTasksForWeek(startOfWeek, endOfWeek) {
             // Crear el contenedor principal de la tarea
             const card = document.createElement('div');
             card.className = 'task-card';
+            card.dataset.id = t.id;
 
             // Título
             const title = document.createElement('h4');
@@ -143,7 +159,7 @@ async function loadTasksForWeek(startOfWeek, endOfWeek) {
             taskList.appendChild(card);
         });
     } catch (err) {
-        console.log("Error de conexión con el servidor");
+        showAlert('error', 'Error de conexión', 'No se pudo conectar con el servidor. Intenta nuevamente.');
     }
 }
 
@@ -161,7 +177,7 @@ updateWeekDisplay();
 
 
 // =======================
-// Modal: formulario para nueva tarea
+// Modal: animaciones para nueva tarea
 // =======================
 const openTaskModal = document.getElementById('task-new');
 const closeBtn = document.getElementById('closeModalBtn');
@@ -192,7 +208,7 @@ closeBtn.addEventListener('click', closeModal);
 
 
 // =======================
-// Dormulario: crear nueva tarea
+// Formulario: crear nueva tarea
 // =======================
 const btnCreateTask = document.getElementById('btn-create-task');
 
@@ -217,6 +233,7 @@ async function createTaskModal() {
     const errorsTask = validateFields(fieldsTask);
 
     if (errorsTask.length > 0) {
+        showAlert('warning', 'Campos incompletos', '', 0, errorsTask.join('<br>'));
         btnCreateTask.disabled = false;
         btnCreateTask.textContent = "Guardar";
         return;
@@ -233,14 +250,16 @@ async function createTaskModal() {
         const res = await createTask(data);
 
         if (res.message) {
-            console.log("Tarea creada exitosamente");
-            document.getElementById("taskForm").reset();
-            updateWeekDisplay();
+            showAlert('success', 'Tarea creada exitosamente', '', 2000);
+            setTimeout(() => {
+                document.getElementById("taskForm").reset();
+                updateWeekDisplay();
+            }, 1500);
         } else {
-            console.log("Error en el registro");
+            showAlert('error', 'Error en el registro', '');
         }
     } catch {
-        console.log("Error de conexión con el servidor");
+        showAlert('error', 'Error de conexión', 'No se pudo conectar con el servidor. Intenta nuevamente.');
     } finally {
         btnCreateTask.disabled = false;
         btnCreateTask.textContent = "Guardar";
@@ -255,16 +274,144 @@ document.getElementById('taskForm').addEventListener('submit', (e) => {
 
 
 // =======================
+// Modal: animaciones para editar tarea
+// =======================
+const closeEditBtn = document.getElementById('closeModalEditBtn');
+const modalEdit = document.getElementById('taskModalEdit');
+const modalContentEdit = modalEdit.querySelector('.modal-content-edit');
+
+const mLine = gsap.timeline({ paused: true, reversed: true });
+mLine.fromTo(modalContentEdit,
+    { y: -50, opacity: 0, scale: 0.9 },
+    { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }
+);
+
+const closeEditModal = () => {
+    mLine.reverse();
+    mLine.eventCallback("onReverseComplete", () => {
+        modalEdit.hidden = true;
+        document.getElementById("taskForm").reset();
+    });
+};
+closeEditBtn.addEventListener('click', closeEditModal);
+
+
+// =======================
+// Click: mostrar informacion de una tarea en el formulario
+// =======================
+document.addEventListener('click', async e => {
+
+    const card = e.target.closest('.task-card');
+    if (!card) return;
+
+    const idTarea = card.dataset.id;
+
+    try {
+        const tarea = await getTask(idTarea);
+
+        if (tarea.error) {
+            showAlert(
+                'error',
+                'Error al obtener la tarea',
+                tarea.error.message || 'Ocurrió un problema al cargar los datos'
+            );
+            return;
+        }
+
+        document.getElementById('title-edit').value = tarea.title;
+        document.getElementById('description-edit').value = tarea.description;
+        document.getElementById('status-edit').value = tarea.status;
+        document.getElementById('priority-edit').value = tarea.priority;
+
+        document.getElementById('taskFormEdit').dataset.id = tarea.id;
+
+        if (mLine.reversed()) {
+            modalEdit.hidden = false;
+            mLine.play();
+        }
+    } catch {
+        showAlert('error', 'Error al obtener la tarea', 'Ocurrió un problema al cargar los datos');
+    }
+
+});
+
+
+// =======================
+// Formulario: editar una tarea
+// =======================
+const btnEditTask = document.getElementById('btn-edit-task');
+
+async function editTaskModal() {
+    btnEditTask.disabled = true;
+    btnEditTask.textContent = "Procesando...";
+
+    const title = document.getElementById('title-edit');
+    const description = document.getElementById('description-edit');
+
+    const status = document.getElementById('status-edit');
+    const selectedStatus = status.value;
+
+    const priority = document.getElementById('priority-edit');
+    const selectedPriority = priority.value;
+
+    const fieldsTask = {
+        title: title.value.trim(),
+        description: description.value.trim()
+    };
+
+    const errorsTask = validateFields(fieldsTask);
+
+    if (errorsTask.length > 0) {
+        showAlert('warning', 'Campos incompletos', '', 0, errorsTask.join('<br>'));
+        btnEditTask.disabled = false;
+        btnEditTask.textContent = "Guardar";
+        return;
+    }
+
+    const data = {
+        title: title.value.trim(),
+        description: description.value.trim(),
+        status: selectedStatus,
+        priority: selectedPriority
+    };
+
+    try {
+        const idTarea = document.getElementById('taskFormEdit').dataset.id;
+        const res = await updateTask(idTarea, data);
+
+        if (res.message) {
+            showAlert('success', 'Tarea actualizada exitosamente', '', 2000);
+            setTimeout(() => {
+                document.getElementById("taskForm").reset();
+                updateWeekDisplay();
+            }, 1500);
+        } else {
+            showAlert('error', 'Error en el registro', '');
+        }
+    } catch {
+        showAlert('error', 'Error de conexión', 'No se pudo conectar con el servidor. Intenta nuevamente.');
+    } finally {
+        btnEditTask.disabled = false;
+        btnEditTask.textContent = "Guardar";
+    }
+}
+
+document.getElementById('taskFormEdit').addEventListener('submit', (e) => {
+    e.preventDefault();
+    editTaskModal();
+    closeEditModal();
+});
+
+
+// =======================
 // Validaciones para los campos { title, description }
 // =======================
 function validateFields({ title, description }) {
-
     const errores = [];
 
     if (!title || !/^[\p{L}\p{N}\p{P}\p{Zs}]+$/u.test(title.trim())) {
         errores.push("El titulo contiene caracteres inválidos.");
     }
-
 
     if (!description || !/^[\p{L}\p{N}\p{P}\p{Zs}]+$/u.test(description.trim())) {
         errores.push("La descripción contiene caracteres inválidos.");
@@ -272,3 +419,41 @@ function validateFields({ title, description }) {
 
     return errores;
 }
+
+
+// =======================
+// Eliminación de una tarea
+// =======================
+const btnDeleteTask = document.getElementById('btn-delete-task');
+
+btnDeleteTask.addEventListener('click', async () => {
+    const idTarea = document.getElementById('taskFormEdit').dataset.id;
+    if (!idTarea) return;
+
+    Swal.fire({
+        title: '¿Seguro que deseas eliminar esta tarea?',
+        text: "Esta acción no se puede deshacer.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+        if (!result.isConfirmed) return;
+
+        try {
+            const res = await deleteTask(idTarea);
+
+            if (res.message) {
+                showAlert('success', 'Tarea eliminada', res.message, 2000);
+                closeEditModal();
+                updateWeekDisplay();
+            } else {
+                showAlert('error', 'Error', res.error || "Error al eliminar");
+            }
+        } catch (err) {
+            showAlert('error', 'Error de conexión', "Error de conexión con el servidor");
+        }
+    });
+});

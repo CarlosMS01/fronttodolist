@@ -1,8 +1,23 @@
 // =======================
 // Imports
 // =======================
-import { lookCursor, robot, passwordFocus, mostrarMensaje } from './index_animations.js';
+import { lookCursor, robot, passwordFocus } from './index_animations.js';
 import { login, register } from '../src/services/auth.js';
+
+
+// =======================
+// Función centralizada de alertas
+// =======================
+function showAlert(icon, title, text, timer = 0, html = null) {
+    Swal.fire({
+        icon,
+        title,
+        text: html ? undefined : text,
+        html: html || undefined,
+        showConfirmButton: !timer,
+        timer: timer || undefined
+    });
+}
 
 
 // =======================
@@ -41,7 +56,7 @@ async function loginTodolist(e) {
     const errores = validateLogin({ email, password });
 
     if (errores.length > 0) {
-        mostrarMensaje('error', errores.join("\n"), { animacion: 'shake' });
+        showAlert('warning', 'Campos incompletos', '', 0, errores.join('<br>'));
         btnLogin.disabled = false;
         btnLogin.textContent = "Entrar";
         return;
@@ -51,14 +66,16 @@ async function loginTodolist(e) {
         const res = await login({ email, password });
 
         if (res.message) {
-            mostrarMensaje('exito', res.message);
-            window.location.href = './assets/pages/home.html';
+            showAlert('success', 'Inicio de sesión exitoso', 'Bienvenido 👋', 2000);
+            setTimeout(() => {
+                window.location.href = './assets/pages/home.html';
+            }, 2000);
         } else {
-            mostrarMensaje('error', res.error || 'Credenciales inválidas');
+            showAlert('error', 'Credenciales inválidas', 'Verifica tu correo y contraseña');
         }
     }
     catch (err) {
-        mostrarMensaje('error', 'Error de conexión con el servidor');
+        showAlert('error', 'Error de conexión', 'No se pudo conectar con el servidor. Intenta nuevamente.');
     } finally {
         btnLogin.disabled = false;
         btnLogin.textContent = "Entrar";
@@ -110,7 +127,7 @@ async function registerTodolist(e) {
     const errores = validateRegister(valores);
 
     if (errores.length > 0) {
-        mostrarMensaje('error', errores.join("\n"), { animacion: 'shake' });
+        showAlert('warning', 'Campos incompletos', '', 0, errores.join('<br>'));
         btnRegister.disabled = false;
         btnRegister.textContent = "Crear cuenta";
         return;
@@ -120,15 +137,17 @@ async function registerTodolist(e) {
         const res = await register(valores);
 
         if (res.message) {
-            mostrarMensaje('exito', res.message, { animacion: 'fade' });
-            document.getElementById("register-form").reset();
-            formLogin.classList.add('active');
-            formRegister.classList.remove('active');
+            showAlert('success', 'Registro exitoso', 'Bienvenido 👋', 2000);
+            setTimeout(() => {
+                document.getElementById("register-form").reset();
+                formLogin.classList.add('active');
+                formRegister.classList.remove('active');
+            }, 2000);
         } else {
-            mostrarMensaje('error', res.error || 'Error en el registro');
+            showAlert('error', 'Error en el registro', 'Verifica tu nombre, correo y contraseña');
         }
     } catch (err) {
-        mostrarMensaje('error', 'Error de conexión con el servidor');
+        showAlert('error', 'Error de conexión', 'No se pudo conectar con el servidor. Intenta nuevamente.');
     } finally {
         btnRegister.disabled = false;
         btnRegister.textContent = "Crear cuenta";
