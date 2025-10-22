@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     const user = await getCurrentUser();
 
     if (user.error || !user.username) {
-        document.getElementById('mensaje').textContent = "No hay un usuario";
+        window.location.href = '../../index.html';
     } else {
         document.getElementById('username').textContent = user.username;
     }
@@ -97,7 +97,6 @@ async function loadTasksForWeek(startOfWeek, endOfWeek) {
         const tasks = await getTasks();
 
         if (!tasks || tasks.length === 0) {
-            console.log("No tienes tareas para esta semana");
             return;
         }
 
@@ -159,7 +158,7 @@ async function loadTasksForWeek(startOfWeek, endOfWeek) {
             taskList.appendChild(card);
         });
     } catch (err) {
-        showAlert('error', 'Error de conexión', 'No se pudo conectar con el servidor. Intenta nuevamente.');
+        showAlert('info', 'No hay tareas', 'No tienes tareas para esta semana');
     }
 }
 
