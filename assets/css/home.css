@@ -1,7 +1,7 @@
 :root {
-    --body-bg: #e1faff;                                                 /* Color de fondo para el body*/
-    --container-bg: linear-gradient(to right, #97e8fb, #0cbbe2);      /* Color de fondo para los contenedores: main, section */
-    --items-bg: #e1faff;                                                /* Color de fondo para botones, inputs, selects, div */
+    --body-bg: #e0e5ec;                                                 /* Color de fondo para el body*/
+    --container-bg: #e0e5ec;      /* Color de fondo para los contenedores: main, section */
+    --items-bg: #e0e5ec;                                                /* Color de fondo para botones, inputs, selects, div */
     --task-priority-low-bg: #DCDCDC;                                    /* Color de fondo para la prioridad baja */
     --task-priority-medium-bg: #ffdb4b;                                 /* Color de fondo para la prioridad media */
     --task-priority-high-bg: #ff0000;                                   /* Color de fondo para la prioridad alta */
@@ -16,9 +16,8 @@
 }
 
 body {
-    height: 100%;
     margin: 0;
-    padding: 10px;
+    padding: 0;
     background: var(--body-bg);
 }
 
@@ -27,16 +26,16 @@ body {
     Estilos para el header principal
 ================================ */
 .header {
-    background: var(--container-bg);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    border-radius: 10px;
+    background: var(--container-bg);
+    padding: 20px;
+    box-shadow: 8px 8px 16px #babecc,
+                -8px -8px 16px #ffffff;
 }
 
 .header h1 {
-    margin: 0 5px 0 0;
     text-align: center;
     font-size: var(--font-size-lg);
 }
@@ -54,14 +53,33 @@ body {
     margin: 0;
 }
 
+.btn-logout {
+    background: var(--items-bg);
+    font-size: var(--font-size-sm);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 6px 6px 12px #babecc,
+                -6px -6px 12px #ffffff;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-logout:active {
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
+}
+
 /* ================================
     Estilos para el main/dashboard
 ================================ */
 .dashboard {
     background: var(--container-bg);
-    border-radius: 10px;
-    margin-top: 10px;
-    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 8px 8px 16px #babecc,
+                -8px -8px 16px #ffffff;
+    padding: 20px;
+    margin: 20px;
 }
 
 
@@ -78,13 +96,21 @@ body {
 }
 
 .task-new {
-    border-radius: 50%;
-    border: none;
-    width: 35px;
-    height: 35px;
+    background: var(--items-bg);
     font-size: var(--font-size-sm);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 6px 6px 12px #babecc,
+                -6px -6px 12px #ffffff;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
+.task-new:active {
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
+}
 
 /* ================================
     Estilos para los formularios
@@ -106,7 +132,7 @@ body {
     display: none !important;
 }
 
-.modal-content {
+.modal-content, .modal-content-edit {
     background: var(--items-bg);
     padding: 2rem;
     border-radius: 8px;
@@ -115,39 +141,25 @@ body {
     position: relative;
 }
 
-.modal-content-edit {
+#closeModalBtn, #closeModalEditBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: none;
     background: var(--items-bg);
-    padding: 2rem;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 400px;
-    position: relative;
-}
-
-#closeModalBtn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
+    border-radius: 12px;
+    box-shadow: 6px 6px 12px #babecc,
+                -6px -6px 12px #ffffff;
+    padding: 6px;
     font-size: var(--font-size-lg);
 }
 
-.modal-content h2 {
-    font-size: var(--font-size-lg);
-    text-align: center;
+#closeModalBtn:active, #closeModalEditBtn:active {
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
 }
 
-#closeModalEditBtn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-}
-
-.modal-content-edit h2 {
+.modal-content h2, .modal-content-edit h2 {
     font-size: var(--font-size-lg);
     text-align: center;
 }
@@ -167,27 +179,28 @@ body {
     margin-bottom: 8px;
 }
 
-.title label {
+.title label, .description label {
     font-size: var(--font-size-sm);
-    margin-bottom: 2px;
+    margin-bottom: 5px;
 }
 
 .title input {
-    border: 1px solid rgb(48, 47, 47);
-    border-radius: 3px;
-    padding: 3px;
-}
-
-.description label {
-    font-size: var(--font-size-sm);
-    margin-bottom: 2px;
+    background: var(--items-bg);
+    border: none;
+    border-radius: 10px;
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
+    padding: 10px;
 }
 
 .description textarea {
     resize: none;
-    border: 1px solid rgb(48, 47, 47);
-    border-radius: 3px;
-    padding: 3px;
+    background: var(--items-bg);
+    border: none;
+    border-radius: 10px;
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
+    padding: 10px;
     height: 70px;
 }
 
@@ -196,20 +209,27 @@ body {
     align-items: center;
     gap: 30px;
     font-size: var(--font-size-sm);
+    margin-top: 5px;
 }
 
-.selects .status,
+.status,
 .priority {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.selects .status select {
-    border: 1px solid rgb(48, 47, 47);
-    border-radius: 3px;
+.status select, .priority select {
+    background: var(--items-bg);
+    border: none;
+    border-radius: 10px;
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
+    padding: 10px;
 }
 
+/* Colores para el estado */
 .option-pending {
     background: var(--task-status-pending-bg);
 }
@@ -222,11 +242,7 @@ body {
     background: var(--task-status-finished-bg);
 }
 
-.selects .priority select {
-    border: 1px solid rgb(48, 47, 47);
-    border-radius: 3px;
-}
-
+/* Colores para la prioridad */
 .option-low {
     background: var(--task-priority-low-bg);
 }
@@ -244,8 +260,25 @@ body {
     justify-content: end;
     align-items: center;
     gap: 30px;
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: var(--font-size-sm);
+}
+
+.btn-create-task {
+    background: var(--items-bg);
+    font-size: var(--font-size-sm);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 6px 6px 12px #babecc,
+                -6px -6px 12px #ffffff;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-create-task:active {
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
 }
 
 
@@ -259,6 +292,7 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
     gap: 15px;
+    margin-top: 20px;
 }
 
 .week {
@@ -269,10 +303,25 @@ body {
 .prev-week,
 .next-week {
     background: var(--items-bg);
-    border: none;
-    padding: 8px 12px;
     font-size: var(--font-size-sm);
     text-align: center;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 6px 6px 12px #babecc,
+                -6px -6px 12px #ffffff;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.prev-week:active {
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
+}
+
+.next-week:active {
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
 }
 
 .week-range {
@@ -288,19 +337,21 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-top: 15px;
+    margin-top: 25px;
 }
 
 .day-column {
     background: var(--items-bg);
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 25px;
+    border-radius: 20px;
+    box-shadow: 8px 8px 16px #babecc,
+                -8px -8px 16px #ffffff;
+    padding: 15px;
+    margin-bottom: 20px;
 }
 
 .day-column h3 {
     font-size: var(--font-size-lg);
-    margin: 0;
+    margin: 5px;
     padding-bottom: 5px;
     border-bottom: 1px solid black;
     display: flex;
@@ -401,7 +452,12 @@ body {
 ================================ */
 footer {
     text-align: center;
-    font-size: var(--font-size-md);
+    padding: 20px;
+    background: var(--container-bg);
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
+    border-radius: 20px;
+    margin: 20px;
 }
 
 
