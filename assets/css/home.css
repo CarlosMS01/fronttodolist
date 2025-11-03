@@ -51,6 +51,11 @@ body {
 .username {
     font-size: var(--font-size-sm);
     margin: 0;
+    padding: 10px;
+    background: var(--container-bg);
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
+    border-radius: 10px;
 }
 
 .btn-logout {
@@ -255,7 +260,7 @@ body {
     background: var(--task-priority-high-bg);
 }
 
-.form-actions {
+.form-actions, .form-actions-edit {
     display: flex;
     justify-content: end;
     align-items: center;
@@ -264,7 +269,7 @@ body {
     font-size: var(--font-size-sm);
 }
 
-.btn-create-task {
+.btn-create-task, .btn-delete-task, .btn-edit-task {
     background: var(--items-bg);
     font-size: var(--font-size-sm);
     border: none;
@@ -276,7 +281,7 @@ body {
     transition: all 0.2s ease-in-out;
 }
 
-.btn-create-task:active {
+.btn-create-task:active, .btn-delete-task:active, .btn-edit-task:active {
     box-shadow: inset 4px 4px 8px #babecc,
                 inset -4px -4px 8px #ffffff;
 }
@@ -383,11 +388,12 @@ body {
 
 
 .task-card {
-    background: #ffffff;
-    border: 1px solid #11c6eb;
     margin-top: 10px;
     padding: 15px;
-    border-radius: 10px;
+    background: var(--container-bg);
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
+    border-radius: 20px;
 }
 
 .task-title {
@@ -412,11 +418,16 @@ body {
     flex-wrap: wrap;
 }
 
-.task-priority {
-    padding: 7px;
-    border-radius: 10px;
+.task-priority, .task-status {
+    padding: 7px 12px;
+    border-radius: 12px;
+    box-shadow: 4px 4px 8px #babecc,
+                -4px -4px 8px #ffffff;
+    font-weight: bold;
+    color: #333;
 }
 
+/* Estilos para las prioridades */
 .task-priority.baja {
     background: var(--task-priority-low-bg)
 }
@@ -429,11 +440,7 @@ body {
     background: var(--task-priority-high-bg)
 }
 
-.task-status {
-    padding: 7px;
-    border-radius: 10px;
-}
-
+/* Estilos para las prioridades */
 .task-status.pendiente {
     background: var(--task-status-pending-bg);
 }
