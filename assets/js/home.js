@@ -3,6 +3,18 @@ import { getTasks, createTask, getTask, updateTask, deleteTask } from '../src/se
 
 
 // =======================
+// Función cambio de tema
+// =======================
+document.getElementById('theme-toggle').addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+
+    // Cambia el ícono 🌙 / ☀️
+    const btn = document.getElementById('theme-toggle');
+    btn.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+});
+
+
+// =======================
 // Función centralizada de alertas
 // =======================
 function showAlert(icon, title, text, timer = 0, html = null) {

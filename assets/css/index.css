@@ -3,6 +3,9 @@
 :root {
     --body-bg: #e0e5ec;
     --container-bg: #e0e5ec;
+    --shadow-first: #babecc;
+    --shadow-second: #ffffff;
+    --text-color: #000000;
 }
 
 body {
@@ -14,6 +17,7 @@ body {
     margin: 0;
     padding: 0;
     background: var(--body-bg);
+    color: var(--text-color);
 }
 
 
@@ -36,8 +40,8 @@ body {
     width: 320px;
     padding: 25px;
     background: var(--container-bg);
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
     border-radius: 20px;
 }
 
@@ -60,13 +64,13 @@ body {
     background: var(--container-bg);
     border: none;
     border-radius: 12px;
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: 6px 6px 12px var(--shadow-first),
+                -6px -6px 12px var(--shadow-second);
 }
 
 .show-login:hover, .show-register:hover {
-    box-shadow: 6px 6px 12px #babecc,
-                -6px -6px 12px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
 }
 
 
@@ -113,8 +117,8 @@ body {
     background: var(--container-bg);
     border: none;
     border-radius: 10px;
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
     outline: none;
 }
 
@@ -131,13 +135,13 @@ body {
     border: none;
     background: var(--container-bg);
     border-radius: 12px;
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: 6px 6px 12px var(--shadow-first),
+                -6px -6px 12px var(--shadow-second);
 }
 
 .btn-login:hover, .btn-register:hover {
-    box-shadow: 6px 6px 12px #babecc,
-                -6px -6px 12px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
 }
 
 /* ================================

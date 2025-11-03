@@ -1,7 +1,12 @@
 :root {
     --body-bg: #e0e5ec;                                                 /* Color de fondo para el body*/
-    --container-bg: #e0e5ec;      /* Color de fondo para los contenedores: main, section */
+    --container-bg: #e0e5ec;                                            /* Color de fondo para los contenedores: main, section */
     --items-bg: #e0e5ec;                                                /* Color de fondo para botones, inputs, selects, div */
+    --shadow-first: #babecc;                                            /* Color para la primera sombra */
+    --shadow-second: #ffffff;                                           /* Color para la segunda sombra */
+    --text-color: #000000;                                              /* Color para el texto */
+    --text-color-select: #0f0f0f;                                       /* Color para el texto de los select */
+    --toggle-label-color: #555;                                         /* Color de fondo para el boton de tema */
     --task-priority-low-bg: #DCDCDC;                                    /* Color de fondo para la prioridad baja */
     --task-priority-medium-bg: #ffdb4b;                                 /* Color de fondo para la prioridad media */
     --task-priority-high-bg: #ff0000;                                   /* Color de fondo para la prioridad alta */
@@ -13,6 +18,17 @@
     --font-size-md: clamp(1.2rem, 2vw, 1.4rem);                           /* Tamaño medio: subtítulos, encabezados pequeños o textos destacados */
     --font-size-lg: clamp(1.5rem, 3vw, 2rem);                             /* Tamaño grande: títulos principales o bloques importantes */
     --font-size-xl: clamp(2rem, 5vw, 3rem);                               /* Tamaño extra grande: hero text, encabezados de secciones o animaciones tipográficas */
+}
+
+body.dark-theme {
+    --body-bg: #121212;                                                 /* Color de fondo para el body*/
+    --container-bg: #1a1a1a;                                            /* Color de fondo para los contenedores: main, section */
+    --items-bg: #1a1a1a;                                                /* Color de fondo para botones, inputs, selects, div */
+    --shadow-first: #0a0a0a;                                            /* Color para la primera sombra */
+    --shadow-second: #2a2a2a;                                           /* Color para la segunda sombra */
+    --text-color: #f5f5f5;                                              /* Color para el texto */
+    --text-color-select: #0f0f0f;                                       /* Color para el texto de los select */
+    --toggle-label-color: #999;                                         /* Color de fondo para el boton de tema */
 }
 
 body {
@@ -31,13 +47,14 @@ body {
     align-items: center;
     background: var(--container-bg);
     padding: 20px;
-    box-shadow: 8px 8px 16px #babecc,
-                -8px -8px 16px #ffffff;
+    box-shadow: 8px 8px 16px var(--shadow-first),
+                -8px -8px 16px var(--shadow-second);
 }
 
 .header h1 {
     text-align: center;
     font-size: var(--font-size-lg);
+    color: var(--text-color);
 }
 
 .header-actions {
@@ -48,14 +65,30 @@ body {
     gap: 15px;
 }
 
+.theme-toggle {
+    background: var(--items-bg);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 6px 6px 12px var(--shadow-first),
+                -6px -6px 12px var(--shadow-second);
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
+}
+
 .username {
     font-size: var(--font-size-sm);
     margin: 0;
     padding: 10px;
     background: var(--container-bg);
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
     border-radius: 10px;
+    color: var(--text-color);
 }
 
 .btn-logout {
@@ -63,16 +96,16 @@ body {
     font-size: var(--font-size-sm);
     border: none;
     border-radius: 12px;
-    box-shadow: 6px 6px 12px #babecc,
-                -6px -6px 12px #ffffff;
+    box-shadow: 6px 6px 12px var(--shadow-first),
+                -6px -6px 12px var(--shadow-second);
     padding: 10px 20px;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    color: var(--text-color);
 }
 
 .btn-logout:active {
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
 }
 
 /* ================================
@@ -81,8 +114,8 @@ body {
 .dashboard {
     background: var(--container-bg);
     border-radius: 20px;
-    box-shadow: 8px 8px 16px #babecc,
-                -8px -8px 16px #ffffff;
+    box-shadow: 8px 8px 16px var(--shadow-first),
+                -8px -8px 16px var(--shadow-second);
     padding: 20px;
     margin: 20px;
 }
@@ -105,16 +138,17 @@ body {
     font-size: var(--font-size-sm);
     border: none;
     border-radius: 12px;
-    box-shadow: 6px 6px 12px #babecc,
-                -6px -6px 12px #ffffff;
+    box-shadow: 6px 6px 12px var(--shadow-first),
+                -6px -6px 12px var(--shadow-second);
     padding: 10px 20px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    color: var(--text-color);
 }
 
 .task-new:active {
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
 }
 
 /* ================================
@@ -153,20 +187,21 @@ body {
     border: none;
     background: var(--items-bg);
     border-radius: 12px;
-    box-shadow: 6px 6px 12px #babecc,
-                -6px -6px 12px #ffffff;
+    box-shadow: 6px 6px 12px var(--shadow-first),
+                -6px -6px 12px var(--shadow-second);
     padding: 6px;
     font-size: var(--font-size-lg);
 }
 
 #closeModalBtn:active, #closeModalEditBtn:active {
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
 }
 
 .modal-content h2, .modal-content-edit h2 {
     font-size: var(--font-size-lg);
     text-align: center;
+    color: var(--text-color);
 }
 
 .form-actions-edit {
@@ -187,15 +222,17 @@ body {
 .title label, .description label {
     font-size: var(--font-size-sm);
     margin-bottom: 5px;
+    color: var(--text-color);
 }
 
 .title input {
     background: var(--items-bg);
     border: none;
     border-radius: 10px;
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
     padding: 10px;
+    color: var(--text-color);
 }
 
 .description textarea {
@@ -203,10 +240,11 @@ body {
     background: var(--items-bg);
     border: none;
     border-radius: 10px;
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
     padding: 10px;
     height: 70px;
+    color: var(--text-color);
 }
 
 .selects {
@@ -215,6 +253,7 @@ body {
     gap: 30px;
     font-size: var(--font-size-sm);
     margin-top: 5px;
+    color: var(--text-color);
 }
 
 .status,
@@ -229,35 +268,42 @@ body {
     background: var(--items-bg);
     border: none;
     border-radius: 10px;
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
     padding: 10px;
+    color: var(--text-color);
 }
 
 /* Colores para el estado */
 .option-pending {
     background: var(--task-status-pending-bg);
+    color: var(--text-color-select);
 }
 
 .option-inprocess {
     background: var(--task-status-inprocess-bg);
+    color: var(--text-color-select);
 }
 
 .option-finished {
     background: var(--task-status-finished-bg);
+    color: var(--text-color-select);
 }
 
 /* Colores para la prioridad */
 .option-low {
     background: var(--task-priority-low-bg);
+    color: var(--text-color-select);
 }
 
 .option-medium {
     background: var(--task-priority-medium-bg);
+    color: var(--text-color-select);
 }
 
 .option-high {
     background: var(--task-priority-high-bg);
+    color: var(--text-color-select);
 }
 
 .form-actions, .form-actions-edit {
@@ -274,16 +320,17 @@ body {
     font-size: var(--font-size-sm);
     border: none;
     border-radius: 12px;
-    box-shadow: 6px 6px 12px #babecc,
-                -6px -6px 12px #ffffff;
+    box-shadow: 6px 6px 12px var(--shadow-first),
+                -6px -6px 12px var(--shadow-second);
     padding: 10px 20px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    color: var(--text-color);
 }
 
 .btn-create-task:active, .btn-delete-task:active, .btn-edit-task:active {
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
 }
 
 
@@ -312,26 +359,28 @@ body {
     text-align: center;
     border: none;
     border-radius: 12px;
-    box-shadow: 6px 6px 12px #babecc,
-                -6px -6px 12px #ffffff;
+    box-shadow: 6px 6px 12px var(--shadow-first),
+                -6px -6px 12px var(--shadow-second);
     padding: 10px 20px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    color: var(--text-color);
 }
 
 .prev-week:active {
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
 }
 
 .next-week:active {
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
 }
 
 .week-range {
     text-align: center;
     font-size: var(--font-size-md);
+    color: var(--text-color);
 }
 
 
@@ -348,8 +397,8 @@ body {
 .day-column {
     background: var(--items-bg);
     border-radius: 20px;
-    box-shadow: 8px 8px 16px #babecc,
-                -8px -8px 16px #ffffff;
+    box-shadow: 8px 8px 16px var(--shadow-first),
+                -8px -8px 16px var(--shadow-second);
     padding: 15px;
     margin-bottom: 20px;
 }
@@ -361,6 +410,7 @@ body {
     border-bottom: 1px solid black;
     display: flex;
     justify-content: space-between;
+    color: var(--text-color);
 }
 
 .task-list {
@@ -381,7 +431,7 @@ body {
 .day-toggle-label {
     float: right;
     font-size: var(--font-size-sm);
-    color: #555;
+    color: var(--toggle-label-color);
     cursor: pointer;
     user-select: none;
 }
@@ -391,14 +441,15 @@ body {
     margin-top: 10px;
     padding: 15px;
     background: var(--container-bg);
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
     border-radius: 20px;
 }
 
 .task-title {
     margin: 0;
     font-size: var(--font-size-md);
+    color: var(--text-color);
 }
 
 .task-description {
@@ -409,6 +460,7 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--text-color);
 }
 
 .task-info {
@@ -421,8 +473,8 @@ body {
 .task-priority, .task-status {
     padding: 7px 12px;
     border-radius: 12px;
-    box-shadow: 4px 4px 8px #babecc,
-                -4px -4px 8px #ffffff;
+    box-shadow: 4px 4px 8px var(--shadow-first),
+                -4px -4px 8px var(--shadow-second);
     font-weight: bold;
     color: #333;
 }
@@ -461,10 +513,11 @@ footer {
     text-align: center;
     padding: 20px;
     background: var(--container-bg);
-    box-shadow: inset 4px 4px 8px #babecc,
-                inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px var(--shadow-first),
+                inset -4px -4px 8px var(--shadow-second);
     border-radius: 20px;
     margin: 20px;
+    color: var(--text-color);
 }
 
 
