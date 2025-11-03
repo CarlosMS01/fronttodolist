@@ -1,58 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+:root {
+    --body-bg: #e0e5ec;
+    --container-bg: #e0e5ec;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 10px;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-}
-
-
-/* ================================
-    Estilos de la notificacion de exito, error, adivertencia
-================================ */
-.flash {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: bold;
-    color: white;
-    z-index: 999;
-    opacity: 0;
-}
-
-.flash.exito {
-    background-color: #4CAF50;
-}
-
-.flash.error {
-    background-color: #F44336;
-}
-
-.flash.advertencia {
-    background-color: #FFC107;
-}
-
-.oculto {
-    display: none;
+    margin: 0;
+    padding: 0;
+    background: var(--body-bg);
 }
 
 
 /* ================================
     Estilos del section
 ================================ */
-.login-register {
+.login {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 50px;
 }
 
 
@@ -61,13 +34,11 @@ body {
 ================================ */
 .container-form {
     width: 320px;
-    margin: auto;
     padding: 25px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.829);
-    color: #fff;
+    background: var(--container-bg);
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
+    border-radius: 20px;
 }
 
 
@@ -78,22 +49,24 @@ body {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    gap: 10px;
 }
 
-.form-toggle button {
+.show-login, .show-register {
     flex: 1;
-    padding: 10px;
-    background: none;
-    border: 1px solid transparent;
-    color: #fff;
+    padding: 10px 20px;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    background: var(--container-bg);
+    border: none;
+    border-radius: 12px;
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
 }
 
-.form-toggle button:hover {
-    color: #00ffff;
-    border: 1px solid #00ffff;
+.show-login:hover, .show-register:hover {
+    box-shadow: 6px 6px 12px #babecc,
+                -6px -6px 12px #ffffff;
 }
 
 
@@ -116,7 +89,7 @@ body {
 
 .form h2 {
     text-align: center;
-    margin: 0;
+    margin: 0 0 10px 0;
 }
 
 .form.active {
@@ -137,20 +110,12 @@ body {
 
 .input-box input {
     padding: 10px;
-    border-radius: 6px;
+    background: var(--container-bg);
     border: none;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
+    border-radius: 10px;
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
     outline: none;
-}
-
-.input-box input::placeholder {
-    color: #fff;
-}
-
-.input-box input:focus {
-    background: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 10px #fff;
 }
 
 .buttons-form {
@@ -158,19 +123,33 @@ body {
     justify-content: center;
 }
 
-.buttons-form button {
+.btn-login, .btn-register {
+    text-align: center;
     padding: 10px 20px;
-    background: none;
-    border-radius: 6px;
-    border: 1px solid #00ffff;
-    color: #fff;
     font-weight: bold;
     cursor: pointer;
+    border: none;
+    background: var(--container-bg);
+    border-radius: 12px;
+    box-shadow: inset 4px 4px 8px #babecc,
+                inset -4px -4px 8px #ffffff;
 }
 
-.buttons-form button:hover {
-    box-shadow: 0 0 10px #00ffff;
-    border: 1px solid #fff;
-    background: #00ffff;
-    color: black;
+.btn-login:hover, .btn-register:hover {
+    box-shadow: 6px 6px 12px #babecc,
+                -6px -6px 12px #ffffff;
+}
+
+/* ================================
+    Estilos para pantallas moviles
+================================ */
+@media (max-width: 768px) {
+    .login {
+        gap: 15px;
+    }
+
+    .container-form {
+        margin: 0 10px;
+        width: 90%;
+    }
 }
