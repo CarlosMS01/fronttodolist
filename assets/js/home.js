@@ -23,11 +23,11 @@ function showAlert(icon, title, text, timer = 0, html = null) {
 window.addEventListener('DOMContentLoaded', async () => {
     const user = await getCurrentUser();
 
-    // if (user.error || !user.username) {
-        // window.location.href = '../../index.html';
-    // } else {
-        // document.getElementById('username').textContent = user.username;
-    // }
+    if (user.error || !user.username) {
+        window.location.href = '../../index.html';
+    } else {
+        document.getElementById('username').textContent = user.username;
+    }
 });
 
 
