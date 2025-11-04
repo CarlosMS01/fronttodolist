@@ -527,9 +527,9 @@ footer {
 @media (max-width: 768px) {
     .header-actions {
         display: flex;
-        justify-content: end;
-        align-items: center;
-        padding: 3px 0;
+        align-items: end;
+        flex-direction: column;
+        padding: 3px;
     }
 
     .prev-week,
